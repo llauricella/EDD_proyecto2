@@ -9,20 +9,13 @@ package EstructurasDeDatos;
  * @author Santiago Castro
  */
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import com.google.gson.*;
+import java.io.*;
+import javax.swing.*;
 
 public class LecturaJson {
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws IOException {
+
+    public void LecturaJson() {
         var chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         var file = chooser.getSelectedFile();

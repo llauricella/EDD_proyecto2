@@ -4,16 +4,16 @@
  */
 package edd_Interfaz;
 
-import org.graphstream.ui.view.*;
-import org.graphstream.ui.swing_viewer.*;
-import javax.swing.*;
-
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.swing_viewer.*;
+import org.graphstream.ui.view.*;
 import java.awt.*;
+import javax.swing.*;
+
 /**
  *
- * @author lalau
+ * @author Luigi Lauricella
  */
 public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     private Graph graph;
