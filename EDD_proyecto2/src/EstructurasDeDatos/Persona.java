@@ -43,7 +43,7 @@ public class Persona {
         this.wedTo = "";
         this.notes = "";
         this.fate = "";
-        this.nickname = fullname + ofHisName;
+        this.nickname = fullname + ofHisName + father + eyes + hair;
     }
     
 
@@ -255,7 +255,12 @@ public class Persona {
         if (!"".equals(getFate())){
             txt += "\nDestino: "+ getFate();
         }
+        
+        
+        
         return txt;
+    
+    
     }
     
     

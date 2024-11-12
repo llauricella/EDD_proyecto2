@@ -20,9 +20,8 @@ public class HashTable {
         for (int i = 0; i < nickname.length(); i++) {
             hash += nickname.charAt(i);
         }
-        
-        hash = hash/10;
-        
+
+        hash = hash / 50;
         return hash;
     }
 
@@ -40,18 +39,16 @@ public class HashTable {
 
         int code = hash(nickname);
         Nodo found = null;
-        
-        if (getTable()[code].getValue() != null){
+
+        if (getTable()[code].getValue() != null) {
             found = (Nodo) getTable()[code].getValue().getValue();
         }
-        
         if (getTable()[code].count() > 1) {
             Lista aux = getTable()[code];
-            ElementoLista act;
             for (int i = 0; i < getTable()[code].count(); i++) {
-                act = (ElementoLista) aux.get(i);
-                if (((Nodo) act.getValue()).getPerson().getNickname().equals(nickname)) {
-                    found = (Nodo) act.getValue();
+                Nodo act = (Nodo) aux.get(i);
+                if (act.getPerson().getNickname().equals(nickname)) {
+                    found = act;
                     break;
                 }
             }
@@ -74,20 +71,36 @@ public class HashTable {
         getNodes().add(newNode);
     }
 
-    /**
-     * @return the nodes
-     */
+    
+    public void recorrer(){
+        // Recorre el hashtable correctamente
+        for (int i = 0; i < getCapacity(); i++) {
+            Lista found = (Lista) getTable()[i];
+
+            if (found.count() == 1) {
+                if (found.get(0) != null) {
+                    Nodo act = (Nodo) found.get(0);
+                    System.out.println(act.getPerson().leer() + "\n");
+                }
+            } else {
+                for (int j = 0; j < found.count(); j++) {
+                    if (found.get(j) != null) {
+                        Nodo act = (Nodo) found.get(j);
+                        System.out.println(act.getPerson().leer() + "\n");
+                    }
+                }
+            }
+        }
+    }
+    
     public Lista getNodes() {
         return nodes;
     }
-
-    /**
-     * @param nodes the nodes to set
-     */
+    
     public void setNodes(Lista nodes) {
         this.nodes = nodes;
     }
-
+    
     /**
      * @return the table
      */
@@ -116,5 +129,4 @@ public class HashTable {
         this.capacity = capacity;
     }
 
-    
 }

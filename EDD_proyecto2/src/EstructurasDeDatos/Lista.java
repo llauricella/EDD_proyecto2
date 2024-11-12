@@ -28,7 +28,7 @@ public class Lista {
             ElementoLista newValue = new ElementoLista();
             newValue.setValue(j);
             newValue.setIndex(count);
-
+            
             if (this.getValue() == null) {
                 this.value = newValue;
             } else {
@@ -41,6 +41,7 @@ public class Lista {
             }
             count++;
         }
+        
     }
 
     /**
@@ -49,6 +50,7 @@ public class Lista {
      * @param index Índice del elemento a retornar
      * @return Elemento encontrado según su índice
      */
+    /*
     public Object get(int index) {
         
         if (index <= this.count()) {
@@ -61,9 +63,23 @@ public class Lista {
             index++;
             if (this.next != null){
                 return this.next.get(index);
+            }
+        }
+        return null;
+    }*/
+    
+    
+    public Object get(int index) 
+    {
+        if (index == 0) {
+            if (this.value != null) {
+                return this.value.getValue();
             } else {
                 return null;
             }
+        } else {
+            index--;
+            return this.next.get(index);
         }
     }
 
@@ -175,7 +191,26 @@ public class Lista {
             }
         }
     }
-
+    
+    /**
+     * Procedimiento para contener el nombre de los elementos una lista de nodos.
+     * 
+     * @return String con la información indicada.
+     */
+    public String printList() {
+        String txt = "";
+        
+        for (int i = 0; i < count(); i++) {
+            
+            var Next =(Nodo)get(i);
+            if (Next != null) {
+                //txt = txt + Next.getPerson().leer()+ "\n";
+                txt = txt + Next.getPerson().getFullname()+ "\n";
+            }
+        }
+        return txt;
+    }
+    
     /**
      * @return the value
      */

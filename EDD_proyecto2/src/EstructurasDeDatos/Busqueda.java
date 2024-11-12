@@ -20,7 +20,7 @@ public class Busqueda {
      * @return Una lista que contenga a todos los nodos que se lograron visitar
      * dentro del rango de búsqueda.
      */
-    public static Lista DFS(Nodo root, int heightLimit) {
+    public Lista DFS(Nodo root, int heightLimit) {
         return getAllNodesByHeight(visitAllNodesDFS(root), heightLimit);
     }
 
@@ -32,7 +32,7 @@ public class Busqueda {
      * @param root Nodo donde se iniciará el recorrido.
      * @return Una lista con todos los nodos visitados.
      */
-    private static Lista visitAllNodesDFS(Nodo root) {
+    private Lista visitAllNodesDFS(Nodo root) {
         Lista visitedNodes = new Lista();
         Lista visited = new Lista();
         Pila stack = new Pila();
@@ -68,15 +68,15 @@ public class Busqueda {
     /**
      * Función que filtra los nodos con base a una altura determinada.
      *
-     * @param grafo Lista de nodos a filtrar.
+     * @param arbol Lista de nodos a filtrar.
      * @param heightLimit Límite de búsqueda.
      * @return Una lista de todos los nodos que se encuentren dentro del límite
      * específicado.
      */
-    private static Lista getAllNodesByHeight(Lista grafo, int heightLimit) {
+    private Lista getAllNodesByHeight(Lista arbol, int heightLimit) {
         Lista result = new Lista();
-        for (int n = 0; n < grafo.count(); n++) {
-            Nodo nodo = (Nodo) grafo.get(n);
+        for (int n = 0; n < arbol.count(); n++) {
+            Nodo nodo = (Nodo) arbol.get(n);
             if (nodo != null) {
                 if (!result.contains(nodo)) {
                     if (nodo.getHeight() <= heightLimit) {

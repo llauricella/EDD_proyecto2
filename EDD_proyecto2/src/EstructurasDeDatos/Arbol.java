@@ -76,7 +76,6 @@ public class Arbol {
         Nodo father = getHashtable().getNode(fatherNickname);
         Nodo child = getHashtable().getNode(childNickname);
         father.getChildren().add(child);
-        
     }
 
     // Eliminar dentro del hashtable
@@ -84,9 +83,11 @@ public class Arbol {
 
     }
 
-    public Nodo findNode(int code) {
-
-        return null;
+    public Lista descendientesPorGeneracion(int height) {
+        Busqueda buscar = new Busqueda();
+        Lista encontrados = buscar.DFS(getRoot(), height);
+        return encontrados;
     }
+    
 
 }
