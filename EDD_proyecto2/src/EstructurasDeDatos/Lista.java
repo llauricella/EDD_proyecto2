@@ -50,25 +50,6 @@ public class Lista {
      * @param index Índice del elemento a retornar
      * @return Elemento encontrado según su índice
      */
-    /*
-    public Object get(int index) {
-        
-        if (index <= this.count()) {
-            if (this.getValue() != null) {
-                return this.getValue().getValue();
-            } else {
-                return null;
-            }
-        } else {
-            index++;
-            if (this.next != null){
-                return this.next.get(index);
-            }
-        }
-        return null;
-    }*/
-    
-    
     public Object get(int index) 
     {
         if (index == 0) {

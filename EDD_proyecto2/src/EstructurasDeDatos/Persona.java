@@ -43,7 +43,7 @@ public class Persona {
         this.wedTo = "";
         this.notes = "";
         this.fate = "";
-        this.nickname = fullname + ofHisName + father + eyes + hair;
+        this.nickname = fullname +","+ ofHisName;
     }
     
 

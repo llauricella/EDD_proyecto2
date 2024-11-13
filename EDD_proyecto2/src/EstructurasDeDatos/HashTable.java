@@ -35,8 +35,8 @@ public class HashTable {
         }
     }
 
-    public Nodo getNode(String nickname) {
-
+    public Nodo getNode(String fullname, String mote) {
+        String nickname = fullname +","+ mote;
         int code = hash(nickname);
         Nodo found = null;
 
@@ -71,7 +71,7 @@ public class HashTable {
         getNodes().add(newNode);
     }
 
-    
+    /*
     public void recorrer(){
         // Recorre el hashtable correctamente
         for (int i = 0; i < getCapacity(); i++) {
@@ -93,6 +93,7 @@ public class HashTable {
         }
     }
     
+    */
     public Lista getNodes() {
         return nodes;
     }
