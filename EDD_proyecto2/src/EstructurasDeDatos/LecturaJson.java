@@ -61,7 +61,8 @@ public class LecturaJson {
                                 var miembroEntry = miembrosEntrySet.iterator().next();
                                 String nombreMiembro = miembroEntry.getKey();
                                 JsonElement caracteristicasElement = miembroEntry.getValue();
-
+                                Lista children = new Lista();
+                                
                                 String ofHisName = "";
                                 String father = "";
                                 String eyes = "";
@@ -76,6 +77,12 @@ public class LecturaJson {
 
                                             for (String key : caracteristica.keySet()) {
                                                 JsonElement value = caracteristica.get(key);
+                                                if (key.equals("Father to") && value.isJsonArray()){
+                                                    JsonArray hijosArray = value.getAsJsonArray();
+                                                    for (JsonElement hijo : hijosArray){
+                                                        children.add(hijo.getAsString());
+                                                    }
+                                                }
                                                 String valor = value.isJsonArray() ? value.getAsJsonArray().toString() : value.getAsString();
                                                 switch (key) {
                                                     case "Of his name" -> ofHisName = valor;
@@ -95,8 +102,8 @@ public class LecturaJson {
                                     continue;
                                 }
 
-                                Person persona = new Person(nombreMiembro, ofHisName, father, eyes, hair);
-
+                                Persona persona = new Persona(nombreMiembro, ofHisName, father, eyes, hair);
+                                
                                 for (JsonElement caracteresElement : caracteristicasElement.getAsJsonArray()) {
                                     JsonObject caracteristica = caracteresElement.getAsJsonObject();
 
@@ -113,11 +120,13 @@ public class LecturaJson {
                                             case "Born to" -> {
                                                 if (!father.equals(valor)) {
                                                     persona.setMother(valor);
+                                                    
                                                 }
                                             }
                                         }
                                     }
                                 }
+                                Nodo nuevoNodo = new Nodo (persona, children, );
                             } else {
                                 JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                             }
