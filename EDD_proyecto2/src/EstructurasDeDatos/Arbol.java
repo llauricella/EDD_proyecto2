@@ -5,17 +5,19 @@
 package EstructurasDeDatos;
 
 /**
- *
+ * @version 13/11/2024
  * @author Michelle García
  */
 public class Arbol {
 
     private Nodo root;
     private HashTable hashtable;
+    private Busqueda buscar;
 
     public Arbol(Nodo root, HashTable hashtable) {
         this.root = root;
         this.hashtable = hashtable;
+        this.buscar = new Busqueda();
     }
 
     /**
@@ -46,6 +48,13 @@ public class Arbol {
         this.hashtable = hashtable;
     }
 
+    /**
+     * @return the buscar
+     */
+    public Busqueda getBuscar() {
+        return buscar;
+    }
+    
     public boolean isEmpty() {
         boolean empty = false;
         if (getRoot().getChildren().count() < 1) {
@@ -54,7 +63,7 @@ public class Arbol {
         return empty;
     }
 
-    // 
+    
     public void addChildren(String fatherNickname, String childNickname) {
         String[] father = fatherNickname.split(",");
         String[] child = childNickname.split(",");
@@ -62,65 +71,50 @@ public class Arbol {
         String fatherMote = father[1];
         String childName = child[0];
         String childMote = child[1];
-        
+
         Nodo parent = getHashtable().getNode(fatherName, fatherMote);
         Nodo children = getHashtable().getNode(childName, childMote);
         parent.getChildren().add(children);
     }
 
-    // Eliminar dentro del hashtable
-    public void delete(int code) {
-
-    }
 
     public Lista descendientesPorGeneracion(int height) {
-        Busqueda buscar = new Busqueda();
-        Lista encontrados = buscar.DFS(getRoot(), height);
+        Lista encontrados = getBuscar().DFS(getRoot(), height);
         return encontrados;
     }
-    
+
     public Lista descendientes(Nodo root) {
-        Busqueda buscar = new Busqueda();
-        Lista encontrados = buscar.DFS(root, getHashtable().getCapacity());
-        return encontrados;
-    }
-    
-    public Lista ancestros (Nodo descendant) {
-        int height = descendant.getHeight()-1;
-        Busqueda buscar = new Busqueda();
-        Lista encontrados = buscar.DFS(getRoot(), height);
+        Lista encontrados = getBuscar().DFS(root, getHashtable().getCapacity());
         return encontrados;
     }
 
+    public Lista ancestros(Nodo descendant) {
+        descendientes(getRoot());
+        int height = descendant.getHeight() - 1;
+        Lista encontrados = getBuscar().DFS(getRoot(), height);
+        return encontrados;
+    }
+   
     public Lista encontrados(String search) {
-
         Lista found = new Lista();
-        Lista get;
 
-        for (int i = 0; i < getHashtable().getCapacity(); i++) {
-            if (getHashtable().getTable()[i].count() == 1) {
-                Nodo aux = (Nodo) getHashtable().getTable()[i].get(0);
-                if (keyIsEqual(search, aux)) {
-                    found.add(aux);
-                }
-            } else if (getHashtable().getTable()[i].count() > 1) {
-                get = getHashtable().getTable()[i];
-                for (int j = 0; j < get.count(); j++) {
-                    Nodo aux = (Nodo) get.get(j);
-                    if (keyIsEqual(search, aux)) {
-                        found.add(aux);
-                    }
-                }
+        for (int i = 0; i < getHashtable().getNodes().count(); i++) {
+            Nodo aux = (Nodo)getHashtable().getNodes().get(i);
+            if (keyIsEqual(search, aux)) {
+                found.add(aux);
             }
         }
-
         return found;
     }
 
-    public boolean keyIsEqual(String key, Nodo value) {
-        String name = value.getPerson().getFullname();
-        String mote = value.getPerson().getKnownAs();
+    public boolean keyIsEqual(String search, Nodo value) {
+        String key = search.toLowerCase();
+        String name = value.getPerson().getFullname().toLowerCase();
+        String mote = value.getPerson().getKnownAs().toLowerCase();
         return name.contains(key) || mote.contains(key);
     }
 
+    
+
+    
 }

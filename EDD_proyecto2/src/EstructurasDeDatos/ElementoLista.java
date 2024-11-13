@@ -8,7 +8,7 @@ package EstructurasDeDatos;
  * Esta clase define a un elemento de tipo ElementoLista. En ella se guardan la
  * posición de un elemento y su valor.
  *
- * @version 27/10/2024
+ * @version 13/11/2024
  * @author Michelle García
  */
 public class ElementoLista {
@@ -67,6 +67,4 @@ public class ElementoLista {
         this.code = code;
     }
 
-    
-    
 }
