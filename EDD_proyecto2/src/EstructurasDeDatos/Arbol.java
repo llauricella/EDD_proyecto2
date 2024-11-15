@@ -95,23 +95,39 @@ public class Arbol {
         return encontrados;
     }
    
-    public Lista encontrados(String search) {
+    public Lista encontradosNombre(String search) {
         Lista found = new Lista();
 
         for (int i = 0; i < getHashtable().getNodes().count(); i++) {
             Nodo aux = (Nodo)getHashtable().getNodes().get(i);
-            if (keyIsEqual(search, aux)) {
+            if (keyIsEqualName(search, aux)) {
+                found.add(aux);
+            }
+        }
+        return found;
+    }
+    public Lista encontradosTitulo(String search) {
+        Lista found = new Lista();
+
+        for (int i = 0; i < getHashtable().getNodes().count(); i++) {
+            Nodo aux = (Nodo)getHashtable().getNodes().get(i);
+            if (keyIsEqualTitle(search, aux)) {
                 found.add(aux);
             }
         }
         return found;
     }
 
-    public boolean keyIsEqual(String search, Nodo value) {
+    public boolean keyIsEqualName(String search, Nodo value) {
         String key = search.toLowerCase();
         String name = value.getPerson().getFullname().toLowerCase();
-        String mote = value.getPerson().getKnownAs().toLowerCase();
+        String mote = value.getPerson().getOfHisName().toLowerCase();
         return name.contains(key) || mote.contains(key);
+    }
+    public boolean keyIsEqualTitle(String search, Nodo value) {
+        String key = search.toLowerCase();
+        String title = value.getPerson().getTitle().toLowerCase();
+        return title.contains(key);
     }
 
     
