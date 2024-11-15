@@ -29,18 +29,20 @@
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="PersonaField" min="-2" pref="129" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                       <Component id="PersonaButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="TituloLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TituloButton" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="TituloLabel" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="TituloField" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="TituloButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -110,7 +112,7 @@
                   <Component id="AntepasadoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="AntepasadoField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TituloLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="GeneraciónLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -119,6 +121,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TituloButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="GeneracionButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="TituloField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
@@ -156,6 +159,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PersonaButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="PersonaLabel">
       <Properties>
@@ -168,6 +174,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="AntepasadoField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AntepasadoFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="AntepasadoLabel">
       <Properties>
@@ -178,6 +187,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TituloButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="TituloLabel">
       <Properties>
@@ -193,6 +205,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ense&#xf1;ar la lista de integrantes de una generaci&#xf3;n"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TituloField">
     </Component>
   </SubComponents>
 </Form>

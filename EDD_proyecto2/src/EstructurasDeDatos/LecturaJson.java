@@ -8,18 +8,21 @@ package EstructurasDeDatos;
  *
  * @author Santiago Castro
  */
-
 import com.google.gson.*;
 import java.io.*;
 import javax.swing.*;
 
 public class LecturaJson {
 
-    public void LecturaJson() {
+    /**
+     * @param args the command line arguments
+     */
+
+    public LecturaJson() {
         var chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         var file = chooser.getSelectedFile();
-        
+
         try {
             if (file != null) {
                 FileReader lector = new FileReader(file);
@@ -54,6 +57,7 @@ public class LecturaJson {
                                 var miembroEntry = miembrosEntrySet.iterator().next();
                                 String nombreMiembro = miembroEntry.getKey();
                                 JsonElement caracteristicasElement = miembroEntry.getValue();
+                                Lista children = new Lista();
 
                                 String ofHisName = "";
                                 String father = "";
@@ -69,16 +73,25 @@ public class LecturaJson {
 
                                             for (String key : caracteristica.keySet()) {
                                                 JsonElement value = caracteristica.get(key);
+                                                if (key.equals("Father to") && value.isJsonArray()) {
+                                                    JsonArray hijosArray = value.getAsJsonArray();
+                                                    for (JsonElement hijo : hijosArray) {
+                                                        children.add(hijo.getAsString());
+                                                    }
+                                                }
                                                 String valor = value.isJsonArray() ? value.getAsJsonArray().toString() : value.getAsString();
                                                 switch (key) {
-                                                    case "Of his name" -> ofHisName = valor;
+                                                    case "Of his name" ->
+                                                        ofHisName = valor;
                                                     case "Born to" -> {
                                                         if (father.isEmpty()) {
                                                             father = valor;
                                                         }
                                                     }
-                                                    case "Of eyes" -> eyes = valor;
-                                                    case "Of hair" -> hair = valor;
+                                                    case "Of eyes" ->
+                                                        eyes = valor;
+                                                    case "Of hair" ->
+                                                        hair = valor;
                                                 }
                                             }
                                         }
@@ -88,7 +101,7 @@ public class LecturaJson {
                                     continue;
                                 }
 
-                                Person persona = new Person(nombreMiembro, ofHisName, father, eyes, hair);
+                                Persona persona = new Persona(nombreMiembro, ofHisName, father, eyes, hair);
 
                                 for (JsonElement caracteresElement : caracteristicasElement.getAsJsonArray()) {
                                     JsonObject caracteristica = caracteresElement.getAsJsonObject();
@@ -98,19 +111,26 @@ public class LecturaJson {
                                         String valor = value.isJsonArray() ? value.getAsJsonArray().toString() : value.getAsString();
 
                                         switch (key) {
-                                            case "Known throughout as" -> persona.setKnownAs(valor);
-                                            case "Held title" -> persona.setTitle(valor);
-                                            case "Wed to" -> persona.setWedTo(valor);
-                                            case "Notes" -> persona.setNotes(valor);
-                                            case "Fate" -> persona.setFate(valor);
+                                            case "Known throughout as" ->
+                                                persona.setKnownAs(valor);
+                                            case "Held title" ->
+                                                persona.setTitle(valor);
+                                            case "Wed to" ->
+                                                persona.setWedTo(valor);
+                                            case "Notes" ->
+                                                persona.setNotes(valor);
+                                            case "Fate" ->
+                                                persona.setFate(valor);
                                             case "Born to" -> {
                                                 if (!father.equals(valor)) {
                                                     persona.setMother(valor);
+
                                                 }
                                             }
                                         }
                                     }
                                 }
+                                Nodo nuevoNodo = new Nodo(persona, children);
                             } else {
                                 JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                             }
@@ -122,7 +142,7 @@ public class LecturaJson {
                     JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }

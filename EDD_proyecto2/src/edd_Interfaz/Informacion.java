@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package edd_Interfaz;
+
+import java.awt.BorderLayout;
 import EstructurasDeDatos.*;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
@@ -11,21 +9,24 @@ import org.graphstream.ui.view.*;
 import java.awt.*;
 import javax.swing.*;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
 /**
  *
  * @author Luigi Lauricella
  */
-public class GraphStream extends javax.swing.JFrame implements ViewerListener {
-    private Arbol tree;
+public class Informacion extends javax.swing.JFrame implements ViewerListener {
     private Graph graph;
+    private Arbol tree;
     private final ViewerPipe fromviewer;
+    private Lista nombres;
     
-    /**
-     * Creates new form GraphStream
-     * @param tree
-     */
-    public GraphStream(Arbol tree) {
-        
+    
+    public Informacion(Arbol tree, Lista nombres) {
+        this.nombres = nombres;
         this.tree = tree;
         initComponents();
         this.setLocationRelativeTo(null);
@@ -34,8 +35,8 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         viewer.enableAutoLayout();
         
         View view = viewer.addDefaultView(false);
-        GraphStreamPanel.setLayout(new BorderLayout());
-        GraphStreamPanel.add((Component) view, BorderLayout.CENTER);
+        InformationPanel.setLayout(new BorderLayout());
+        InformationPanel.add((Component) view, BorderLayout.CENTER);
         
         fromviewer = viewer.newViewerPipe();
         fromviewer.addViewerListener(this);
@@ -44,11 +45,15 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         PumpViewer();
     }
 
-    public void populateGraph() {
-        graph.addNode("First, Orys Baratheon").setAttribute("ui.label", "First, Orys Baratheon");
-        graph.addNode("B").setAttribute("ui.label", "B");
-        graph.addEdge("AB", "First, Orys Baratheon", "B");
-        graph.setAttribute("ui.stylesheet", "node { fill-color: grey; }");
+    public void populateGraph(Lista nombres) {
+        for (int i = 0; i < nombres.count(); i++) {
+            String nombre = (String) nombres.get(i);
+            graph.addNode(nombre);
+            if (i + 1 < nombres.count()) {
+                String siguiente = (String) nombres.get(i+1);
+                graph.addEdge(nombre + siguiente, nombre, siguiente);
+            }
+        }
     }
     
     private void PumpViewer() {
@@ -95,7 +100,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     @Override
     public void mouseLeft(String id) {
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,30 +110,28 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        GraphStreamPanel = new javax.swing.JPanel();
+        InformationPanel = new javax.swing.JPanel();
 
-        setTitle("GraphStream");
-
-        javax.swing.GroupLayout GraphStreamPanelLayout = new javax.swing.GroupLayout(GraphStreamPanel);
-        GraphStreamPanel.setLayout(GraphStreamPanelLayout);
-        GraphStreamPanelLayout.setHorizontalGroup(
-            GraphStreamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+        javax.swing.GroupLayout InformationPanelLayout = new javax.swing.GroupLayout(InformationPanel);
+        InformationPanel.setLayout(InformationPanelLayout);
+        InformationPanelLayout.setHorizontalGroup(
+            InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
-        GraphStreamPanelLayout.setVerticalGroup(
-            GraphStreamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+        InformationPanelLayout.setVerticalGroup(
+            InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(GraphStreamPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(InformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(GraphStreamPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(InformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -151,54 +154,23 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GraphStream.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GraphStream.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GraphStream.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraphStream.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GraphStream(tree).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Informacion(tree, nombres).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel GraphStreamPanel;
+    private javax.swing.JPanel InformationPanel;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * @return the graph
-     */
-    public Graph getGraph() {
-        return graph;
-    }
-
-    /**
-     * @param graph the graph to set
-     */
-    public void setGraph(Graph graph) {
-        this.graph = graph;
-    }
-
-    /**
-     * @return the tree
-     */
-    public Arbol getTree() {
-        return tree;
-    }
-
-    /**
-     * @param tree the tree to set
-     */
-    public void setTree(Arbol tree) {
-        this.tree = tree;
-    }
 }
