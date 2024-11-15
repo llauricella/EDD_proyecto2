@@ -5,11 +5,11 @@
 package EstructurasDeDatos;
 
 /**
- *
+ * @version 13/11/2024
  * @author Michelle García
  */
 public class Persona {
-    
+
     private String fullname;
     private String knownAs;
     private String ofHisName;
@@ -22,16 +22,18 @@ public class Persona {
     private String notes;
     private String fate;
     private String nickname;
-
-    /***
-     
+    private Lista children;
+    /**
+     *
      * @param fullname
      * @param ofHisName
      * @param father
      * @param hair
      * @param eyes
+     * @param children
      */
-    public Persona(String fullname, String ofHisName, String father, String eyes, String hair) {
+    
+    public Persona(String fullname, String ofHisName, String father, String eyes, String hair, Lista children) {
         this.fullname = fullname;
         this.ofHisName = ofHisName;
         this.father = father;
@@ -43,9 +45,9 @@ public class Persona {
         this.wedTo = "";
         this.notes = "";
         this.fate = "";
-        this.nickname = fullname + ofHisName + father + eyes + hair;
+        this.children = children;
+        this.nickname = fullname + ", " + ofHisName;
     }
-    
 
     /**
      * @return the fullname
@@ -214,54 +216,53 @@ public class Persona {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    
+
     // String fullname, String ofHisName, String father, String eyes, String hair
-    public String leer(){
-    
+    public String leer() {
+
         String txt = "";
-        
-        txt +="Nombre completo: "+ getFullname() +" "+ getOfHisName()
-                + "\nPadre: "+ getFather() 
-                + "\nOjos: " + getEyes() 
-                +"\nCabello: " + getHair()
-                +"\nNickname: " + getNickname();
-    
-        /*
-    private String knownAs;
-    private String mother;
-    private String title;
-    private String wedTo;
-    private String notes;
-    private String fate;
-    private String nickname;
-        
-        
-        */
-        if (!"".equals(getKnownAs())){
-            txt += "\nConocido como: "+ getKnownAs();
+
+        txt += "Nombre completo: " + getFullname() + " " + getOfHisName()
+                + "\nPadre: " + getFather()
+                + "\nOjos: " + getEyes()
+                + "\nCabello: " + getHair()
+                + "\nNickname: " + getNickname();
+
+        if (!"".equals(getKnownAs())) {
+            txt += "\nConocido como: " + getKnownAs();
         }
-        if (!"".equals(getMother())){
-            txt += "\nMadre: "+ getMother();
+        if (!"".equals(getMother())) {
+            txt += "\nMadre: " + getMother();
         }
-        if (!"".equals(getTitle())){
-            txt += "\nTitulo: "+ getTitle();
+        if (!"".equals(getTitle())) {
+            txt += "\nTitulo: " + getTitle();
         }
-        if (!"".equals(getWedTo())){
-            txt += "\nConyuge: "+ getWedTo();
+        if (!"".equals(getWedTo())) {
+            txt += "\nConyuge: " + getWedTo();
         }
-        if (!"".equals(getNotes())){
-            txt += "\nNotas: "+ getNotes();
+        if (!"".equals(getNotes())) {
+            txt += "\nNotas: " + getNotes();
         }
-        if (!"".equals(getFate())){
-            txt += "\nDestino: "+ getFate();
+        if (!"".equals(getFate())) {
+            txt += "\nDestino: " + getFate();
         }
-        
-        
-        
+
         return txt;
-    
-    
+
     }
-    
-    
+
+    /**
+     * @return the children
+     */
+    public Lista getChildren() {
+        return children;
+    }
+
+    /**
+     * @param children the children to set
+     */
+    public void setChildren(Lista children) {
+        this.children = children;
+    }
+
 }

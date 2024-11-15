@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * En esta clase se almacenan todos lo métodos de busca a ejecutar.
  *
- * @version 27/10/2024
+ * @version 13/11/2024
  * @author Michelle García
  */
 public class Busqueda {
@@ -23,7 +23,6 @@ public class Busqueda {
     public Lista DFS(Nodo root, int heightLimit) {
         return getAllNodesByHeight(visitAllNodesDFS(root), heightLimit);
     }
-
 
     /**
      * Función que visita todos los nodos dentro del grafo utilizando la

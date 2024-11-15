@@ -5,7 +5,7 @@
 package EstructurasDeDatos;
 
 /**
- *
+ * @version 13/11/2024
  * @author Michelle García
  */
 public class HashTable {
@@ -14,17 +14,12 @@ public class HashTable {
     private Lista nodes;
     private Lista[] table;
 
-    public int hash(String nickname) {
-        int hash = 0;
-
-        for (int i = 0; i < nickname.length(); i++) {
-            hash += nickname.charAt(i);
-        }
-
-        hash = hash / 50;
-        return hash;
-    }
-
+    /**
+     * Constructor del hashtable
+     *
+     *
+     * @param capacity
+     */
     public HashTable(int capacity) {
         this.capacity = capacity;
         this.nodes = new Lista();
@@ -35,8 +30,34 @@ public class HashTable {
         }
     }
 
-    public Nodo getNode(String nickname) {
+    /**
+     * Función para generar un hash
+     *
+     *
+     * @param nickname
+     * @return
+     */
+    public int hash(String nickname) {
+        int hash = 0;
 
+        for (int i = 0; i < nickname.length(); i++) {
+            hash += nickname.charAt(i);
+        }
+
+        hash = hash / 47;
+        return hash;
+    }
+
+    /**
+     * Función para obtener un nodo
+     *
+     *
+     * @param fullname
+     * @param mote
+     * @return
+     */
+    public Nodo getNode(String fullname, String mote) {
+        String nickname = fullname + "," + mote;
         int code = hash(nickname);
         Nodo found = null;
 
@@ -57,6 +78,12 @@ public class HashTable {
         return found;
     }
 
+    /**
+     * Función para agregar un nodo al hashtable
+     *
+     *
+     * @param newNode
+     */
     public void addNode(Nodo newNode) {
         String toHash = newNode.getPerson().getNickname();
         int code = hash(toHash);
@@ -67,40 +94,18 @@ public class HashTable {
             code = code / 2;
             getTable()[code].add(newNode);
         }
-        
+
         getNodes().add(newNode);
     }
 
-    
-    public void recorrer(){
-        // Recorre el hashtable correctamente
-        for (int i = 0; i < getCapacity(); i++) {
-            Lista found = (Lista) getTable()[i];
-
-            if (found.count() == 1) {
-                if (found.get(0) != null) {
-                    Nodo act = (Nodo) found.get(0);
-                    System.out.println(act.getPerson().leer() + "\n");
-                }
-            } else {
-                for (int j = 0; j < found.count(); j++) {
-                    if (found.get(j) != null) {
-                        Nodo act = (Nodo) found.get(j);
-                        System.out.println(act.getPerson().leer() + "\n");
-                    }
-                }
-            }
-        }
-    }
-    
     public Lista getNodes() {
         return nodes;
     }
-    
+
     public void setNodes(Lista nodes) {
         this.nodes = nodes;
     }
-    
+
     /**
      * @return the table
      */

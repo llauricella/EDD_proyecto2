@@ -5,7 +5,7 @@
 package EstructurasDeDatos;
 
 /**
- *
+ * @version 13/11/2024
  * @author Michelle García
  */
 public class Nodo {
@@ -13,13 +13,10 @@ public class Nodo {
     private Lista children;
     private Persona person;
     private int height;
-    private Nodo mother;
-   
 
-    public Nodo(Persona person, Lista children, Nodo mother) {
+    public Nodo(Persona person, Lista children) {
         this.person = person;
         this.children = children;
-        this.mother = mother;
     }
 
     public Nodo(Persona person) {
@@ -69,21 +66,6 @@ public class Nodo {
         this.children = children;
     }
 
-    /**
-     * @return the mother
-     */
-    public Nodo getMother() {
-        return mother;
-    }
-
-    /**
-     * @param mother the mother to set
-     */
-    public void setMother(Nodo mother) {
-        this.mother = mother;
-    }
-
-    
     
     
 }
