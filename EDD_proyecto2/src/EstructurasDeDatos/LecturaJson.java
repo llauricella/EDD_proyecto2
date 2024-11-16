@@ -15,10 +15,13 @@ import javax.swing.*;
 public class LecturaJson {
 
     /**
-     * @param args the command line arguments
-     */
-
-    public LecturaJson() {
+     *
+     * @return 
+     * @throws java.io.IOException */
+    public Arbol LecturaJson() throws IOException {
+        HashTable hashtable = new HashTable(500);
+        Nodo root = null;
+        Arbol arbol = null;
         var chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         var file = chooser.getSelectedFile();
@@ -35,7 +38,6 @@ public class LecturaJson {
 
                     if (redEntrySet.size() != 1) {
                         JOptionPane.showMessageDialog(null, "ERROR, No es un dato válido", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
                     }
 
                     var redEntry = redEntrySet.iterator().next();
@@ -51,7 +53,7 @@ public class LecturaJson {
 
                                 if (miembrosEntrySet.size() != 1) {
                                     JOptionPane.showMessageDialog(null, "ERROR, No es un dato válido", "Error", JOptionPane.ERROR_MESSAGE);
-                                    return;
+                                    ;
                                 }
 
                                 var miembroEntry = miembrosEntrySet.iterator().next();
@@ -101,7 +103,7 @@ public class LecturaJson {
                                     continue;
                                 }
 
-                                Persona persona = new Persona(nombreMiembro, ofHisName, father, eyes, hair);
+                                Persona persona = new Persona(nombreMiembro, ofHisName, father, eyes, hair, children);
 
                                 for (JsonElement caracteresElement : caracteristicasElement.getAsJsonArray()) {
                                     JsonObject caracteristica = caracteresElement.getAsJsonObject();
@@ -130,7 +132,11 @@ public class LecturaJson {
                                         }
                                     }
                                 }
-                                Nodo nuevoNodo = new Nodo(persona, children);
+                                Nodo nuevoNodo = new Nodo(persona);
+                                hashtable.addNode(nuevoNodo);
+                                if (root == null) {
+                                    root = nuevoNodo;
+                                }
                             } else {
                                 JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                             }
@@ -142,9 +148,29 @@ public class LecturaJson {
                     JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+            arbol = new Arbol(root, hashtable);
+            for (int i = 0; i < hashtable.getNodes().count(); i++) {
+                Nodo aux = (Nodo) hashtable.getNodes().get(i);
+                if (aux.getPerson().getChildren().count() > 0) {
+                    for (int j = 0; j < hashtable.getNodes().count(); j++) {
+                        Nodo aux2 = (Nodo) hashtable.getNodes().get(j);
+                        if (aux.getPerson().getFullname().equals(aux2.getPerson().getFather())) {
+                            arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                        } else if (aux.getPerson().getKnownAs().equals(aux2.getPerson().getFather())) {
+                            arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                        } else {
+                            String nickname = aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName() + " of his name";
+                            if (nickname.equals(aux2.getPerson().getFather())) {
+                                arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                            }
+                        }
+                    }
+                }
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return arbol;
     }
 }

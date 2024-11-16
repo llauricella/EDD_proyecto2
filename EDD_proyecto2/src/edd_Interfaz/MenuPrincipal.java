@@ -5,6 +5,7 @@
 package edd_Interfaz;
 
 import EstructurasDeDatos.*;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,10 +13,11 @@ import javax.swing.JOptionPane;
  * @author Luigi Lauricella
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+
     private GraphStream graphstream;
     private Informacion info;
     private Arbol tree;
-    
+
     /**
      * Creates new form MenuPrincipal
      */
@@ -184,83 +186,95 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JSONButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JSONButtonActionPerformed
-        /***
-         * Botón para subir un archivo JSON a la interfaz
-         * para su debido procesamiento.
+        /**
+         * *
+         * Botón para subir un archivo JSON a la interfaz para su debido
+         * procesamiento.
          */
         if (graphstream != null) {
             graphstream.setVisible(false);
             graphstream = null;
         }
-        // tree =
-        LecturaJson lecturajson = new LecturaJson();
-        
+        try {
+            tree = new LecturaJson().LecturaJson();
+        } catch (IOException ex) {
+            System.out.println("ERROR");
+        }
+
         graphstream = new GraphStream(tree);
+        graphstream.populateGraph(tree);
+
     }//GEN-LAST:event_JSONButtonActionPerformed
 
     private void ArbolButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolButtonActionPerformed
-        /***
-         * Botón para abrir la interfaz visual del árbol
-         * de la librería de GraphStream.
+        /**
+         * *
+         * Botón para abrir la interfaz visual del árbol de la librería de
+         * GraphStream.
          */
-        
+
         // if (tree != null) {} else {JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);}
         if (graphstream != null) {
             if (!graphstream.isVisible()) {
-            graphstream.populateGraph();
-            graphstream.setVisible(true);
+                graphstream.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_ArbolButtonActionPerformed
 
     private void PersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonaButtonActionPerformed
-        
-        // if (tree != null) {} else {JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);}
-        String person = PersonaField.getText();
-        if (person != null) {
-            if (graphstream != null) {
-                
-                
-                
+
+        if (tree != null) {
+            String person = PersonaField.getText();
+            if (person != null) {
+                if (graphstream != null) {
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        PersonaField.setText("");
     }//GEN-LAST:event_PersonaButtonActionPerformed
 
     private void AntepasadoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoFieldActionPerformed
-        
-        // if (tree != null) {} else {JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);}
-        String antepasado = AntepasadoField.getText();
-        if (antepasado != null) {
-            if (graphstream != null) {
-                String[] nickname = antepasado.split(", ");
-                Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
-                Lista resultados = tree.ancestros(aux);
-                info = new Informacion(tree, resultados);
+
+        if (tree != null) {
+            String antepasado = AntepasadoField.getText();
+            if (antepasado != null) {
+                if (graphstream != null) {
+                    String[] nickname = antepasado.split(", ");
+                    Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
+                    Lista resultados = tree.ancestros(aux);
+                    info = new Informacion(tree, resultados);
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
         AntepasadoField.setText("");
     }//GEN-LAST:event_AntepasadoFieldActionPerformed
 
     private void TituloButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloButtonActionPerformed
-        
+
         String titulo = TituloField.getText();
         if (titulo != null) {
             if (graphstream != null) {
-                
-                //info = new Informacion();
-                info.setVisible(true);
-                
+
+                //info = new Informacion(tree, );
+                //info.setVisible(true);
+
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
             }

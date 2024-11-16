@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package edd_Interfaz;
+
 import EstructurasDeDatos.*;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
@@ -19,24 +20,24 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     private Arbol tree;
     private Graph graph;
     private final ViewerPipe fromviewer;
-    
+
     /**
      * Creates new form GraphStream
+     *
      * @param tree
      */
     public GraphStream(Arbol tree) {
-        
         this.tree = tree;
         initComponents();
         this.setLocationRelativeTo(null);
         graph = new SingleGraph("Example");
         Viewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
         viewer.enableAutoLayout();
-        
+
         View view = viewer.addDefaultView(false);
         GraphStreamPanel.setLayout(new BorderLayout());
         GraphStreamPanel.add((Component) view, BorderLayout.CENTER);
-        
+
         fromviewer = viewer.newViewerPipe();
         fromviewer.addViewerListener(this);
         fromviewer.addSink(graph);
@@ -44,13 +45,59 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         PumpViewer();
     }
 
-    public void populateGraph() {
-        graph.addNode("First, Orys Baratheon").setAttribute("ui.label", "First, Orys Baratheon");
-        graph.addNode("B").setAttribute("ui.label", "B");
-        graph.addEdge("AB", "First, Orys Baratheon", "B");
+    public void populateGraph(Arbol tree) {
+        graph.clear();
+        HashTable hashtable = tree.getHashtable();
+        agregarNodos(hashtable);
+
+        // Opcional: Agregar estilo al grafo
         graph.setAttribute("ui.stylesheet", "node { fill-color: grey; }");
+        JOptionPane.showMessageDialog(this, "Grafo poblado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
+    private void agregarNodos(HashTable hashtable) {
+        Lista nodes = hashtable.getNodes();
+        
+        for (int i = 0; i < nodes.count(); i++) {
+            Nodo node = (Nodo) nodes.get(i);
+
+            if (node == null) {
+                continue;
+            }
+
+            String nodeId = node.getPerson().getFullname() + ", " + node.getPerson().getOfHisName();
+
+            if (graph.getNode(nodeId) == null) {
+                graph.addNode(nodeId).setAttribute("ui.label", nodeId); 
+            }
+
+            Lista children = node.getChildren();
+
+            if (children == null || children.count() == 0) {
+                continue;
+            }
+
+            for (int j = 0; j < children.count(); j++) {
+                Nodo child = (Nodo) children.get(j);
+
+                if (child == null) {
+                    continue;
+                }
+
+                String childId = child.getPerson().getFullname()+ ", " + child.getPerson().getOfHisName();
+
+                if (graph.getNode(childId) == null) {
+                    graph.addNode(childId).setAttribute("ui.label", childId);
+                }
+
+                String edgeId = nodeId + "-" + childId;
+                if (graph.getEdge(edgeId) == null) {
+                    graph.addEdge(edgeId, nodeId, childId);
+                }
+            }
+        }
+    }
+
     private void PumpViewer() {
         SwingWorker<Void, Void> worker = new SwingWorker<>() {
             @Override
@@ -68,7 +115,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         };
         worker.execute();
     }
-    
+
     @Override
     public void viewClosed(String id) {
     }
@@ -78,9 +125,8 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         Node node = graph.getNode(id);
         if (node != null) {
             String[] fullname = id.split(", ");
-            // String resultados = tree.getHashtable().getNode(fullname[0], fullname[1]).getPerson().leer(); 
-            // JOptionPane.showMessageDialog(null, resultados, id, JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(null, fullname[0] + fullname[1], id, JOptionPane.INFORMATION_MESSAGE);
+            //String resultados = tree.getHashtable().getNode(fullname[0], fullname[1]).getPerson().leer(); 
+            JOptionPane.showMessageDialog(null, "resultados", id, JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -95,7 +141,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     @Override
     public void mouseLeft(String id) {
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -22,7 +22,7 @@ public class Persona {
     private String notes;
     private String fate;
     private String nickname;
-
+    private Lista children;
     /**
      *
      * @param fullname
@@ -30,8 +30,10 @@ public class Persona {
      * @param father
      * @param hair
      * @param eyes
+     * @param children
      */
-    public Persona(String fullname, String ofHisName, String father, String eyes, String hair) {
+    
+    public Persona(String fullname, String ofHisName, String father, String eyes, String hair, Lista children) {
         this.fullname = fullname;
         this.ofHisName = ofHisName;
         this.father = father;
@@ -43,7 +45,8 @@ public class Persona {
         this.wedTo = "";
         this.notes = "";
         this.fate = "";
-        this.nickname = fullname + "," + ofHisName;
+        this.children = children;
+        this.nickname = fullname + ", " + ofHisName;
     }
 
     /**
@@ -246,6 +249,20 @@ public class Persona {
 
         return txt;
 
+    }
+
+    /**
+     * @return the children
+     */
+    public Lista getChildren() {
+        return children;
+    }
+
+    /**
+     * @param children the children to set
+     */
+    public void setChildren(Lista children) {
+        this.children = children;
     }
 
 }
