@@ -15,7 +15,6 @@ public class ElementoLista {
 
     private int index;
     private Object value;
-    private int code;
 
     /**
      * Función que devuelve el valor del atributo índice.
@@ -52,19 +51,4 @@ public class ElementoLista {
     public void setValue(Object value) {
         this.value = value;
     }
-
-    /**
-     * @return the code
-     */
-    public int getCode() {
-        return code;
-    }
-
-    /**
-     * @param code the code to set
-     */
-    public void setCode(int code) {
-        this.code = code;
-    }
-
 }
