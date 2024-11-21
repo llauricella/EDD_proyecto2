@@ -31,7 +31,7 @@ public class Busqueda {
      * @param root Nodo donde se iniciará el recorrido.
      * @return Una lista con todos los nodos visitados.
      */
-    private Lista visitAllNodesDFS(Nodo root) {
+    public Lista visitAllNodesDFS(Nodo root) {
         Lista visitedNodes = new Lista();
         Lista visited = new Lista();
         Pila stack = new Pila();

@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 public class MenuPrincipal extends javax.swing.JFrame {
 
     private GraphStream graphstream;
-    private Informacion info;
     private Arbol tree;
 
     /**
@@ -23,6 +22,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        AntepasadoBox.removeAllItems();
+        PersonaBox.removeAllItems();
     }
 
     /**
@@ -37,17 +38,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TituloPrincipalLabel = new javax.swing.JLabel();
         JSONButton = new javax.swing.JButton();
         ArbolButton = new javax.swing.JButton();
-        PersonaField = new javax.swing.JTextField();
         PersonaButton = new javax.swing.JButton();
         PersonaLabel = new javax.swing.JLabel();
         AntepasadoButton = new javax.swing.JButton();
-        AntepasadoField = new javax.swing.JTextField();
         AntepasadoLabel = new javax.swing.JLabel();
         TituloButton = new javax.swing.JButton();
         TituloLabel = new javax.swing.JLabel();
         GeneracionButton = new javax.swing.JButton();
         GeneraciónLabel = new javax.swing.JLabel();
         TituloField = new javax.swing.JTextField();
+        AntepasadoBox = new javax.swing.JComboBox<>();
+        PersonaBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,10 +79,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PersonaLabel.setText("Buscar persona por nombre");
 
         AntepasadoButton.setText("Mostrar");
-
-        AntepasadoField.addActionListener(new java.awt.event.ActionListener() {
+        AntepasadoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AntepasadoFieldActionPerformed(evt);
+                AntepasadoButtonActionPerformed(evt);
             }
         });
 
@@ -100,6 +100,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         GeneraciónLabel.setText("Enseñar la lista de integrantes de una generación");
 
+        AntepasadoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        PersonaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        PersonaBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PersonaBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,8 +121,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(47, 47, 47)
+                                        .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(PersonaButton))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(TituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,16 +133,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                         .addComponent(TituloButton)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(106, 106, 106)
-                                        .addComponent(GeneracionButton))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
                                         .addComponent(GeneraciónLabel))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(88, 88, 88)
-                                        .addComponent(AntepasadoField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(AntepasadoButton))))
+                                        .addGap(45, 45, 45)
+                                        .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(AntepasadoButton))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(141, 141, 141)
+                                        .addComponent(GeneracionButton))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -166,10 +175,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(AntepasadoLabel))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PersonaButton)
                     .addComponent(AntepasadoButton)
-                    .addComponent(AntepasadoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TituloLabel)
@@ -201,8 +210,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             System.out.println("ERROR");
         }
 
-        graphstream = new GraphStream(tree);
-        graphstream.populateGraph(tree);
+        Lista nodos = tree.getHashtable().getNodes();
+        for (int i = 1; i < tree.getHashtable().getNodes().count(); i++) {
+            Nodo aux = (Nodo) nodos.get(i);
+            AntepasadoBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
+            PersonaBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
+        }
+
 
     }//GEN-LAST:event_JSONButtonActionPerformed
 
@@ -213,11 +227,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
          * GraphStream.
          */
 
-        // if (tree != null) {} else {JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);}
-        if (graphstream != null) {
-            if (!graphstream.isVisible()) {
+        if (tree != null) {
+            if (graphstream != null) {
+                if (!graphstream.isVisible()) {
+                    graphstream.dispose();
+                    graphstream = new GraphStream(tree);
+                    Nodo root = tree.getRoot();
+                    graphstream.populateGraphbyRoot(root);
+                    graphstream.setVisible(true);
+                }
+            } else {
+                graphstream = new GraphStream(tree);
+                Nodo root = tree.getRoot();
+                graphstream.populateGraphbyRoot(root);
                 graphstream.setVisible(true);
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -225,63 +250,53 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_ArbolButtonActionPerformed
 
     private void PersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonaButtonActionPerformed
-
         if (tree != null) {
-            String person = PersonaField.getText();
-            if (person != null) {
-                if (graphstream != null) {
+            String selectedItem = (String) PersonaBox.getSelectedItem();
+            if (selectedItem != null) {
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ERROR, no elegiste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        PersonaField.setText("");
     }//GEN-LAST:event_PersonaButtonActionPerformed
-
-    private void AntepasadoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoFieldActionPerformed
-
-        if (tree != null) {
-            String antepasado = AntepasadoField.getText();
-            if (antepasado != null) {
-                if (graphstream != null) {
-                    String[] nickname = antepasado.split(", ");
-                    Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
-                    Lista resultados = tree.ancestros(aux);
-                    info = new Informacion(tree, resultados);
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        AntepasadoField.setText("");
-    }//GEN-LAST:event_AntepasadoFieldActionPerformed
 
     private void TituloButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloButtonActionPerformed
 
         String titulo = TituloField.getText();
         if (titulo != null) {
-            if (graphstream != null) {
 
-                //info = new Informacion(tree, );
-                //info.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR, no cargaste un JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_TituloButtonActionPerformed
+
+    private void AntepasadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoButtonActionPerformed
+        if (tree != null) {
+            String antepasado = (String) AntepasadoBox.getSelectedItem();
+            if (antepasado != null) {
+                System.out.println(antepasado);
+                if (graphstream != null) { graphstream.dispose(); }
+                graphstream = new GraphStream(tree);
+                String[] nickname = antepasado.split(", ");
+                System.out.println(nickname[0]+nickname[1]);
+                Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
+                System.out.println(aux.getPerson().getFullname());
+                graphstream.populateGraphbyRoot(aux);
+                graphstream.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_AntepasadoButtonActionPerformed
+
+    private void PersonaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonaBoxActionPerformed
+
+    }//GEN-LAST:event_PersonaBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,15 +333,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> AntepasadoBox;
     private javax.swing.JButton AntepasadoButton;
-    private javax.swing.JTextField AntepasadoField;
     private javax.swing.JLabel AntepasadoLabel;
     private javax.swing.JButton ArbolButton;
     private javax.swing.JButton GeneracionButton;
     private javax.swing.JLabel GeneraciónLabel;
     private javax.swing.JButton JSONButton;
+    private javax.swing.JComboBox<String> PersonaBox;
     private javax.swing.JButton PersonaButton;
-    private javax.swing.JTextField PersonaField;
     private javax.swing.JLabel PersonaLabel;
     private javax.swing.JButton TituloButton;
     private javax.swing.JTextField TituloField;
