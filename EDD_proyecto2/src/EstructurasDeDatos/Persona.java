@@ -33,6 +33,22 @@ public class Persona {
      * @param children
      */
     
+    public Persona(String fullname, String ofHisName, String father, String eyes, String hair) {
+        this.fullname = fullname;
+        this.ofHisName = ofHisName;
+        this.father = father;
+        this.eyes = eyes;
+        this.hair = hair;
+        this.knownAs = "";
+        this.mother = "";
+        this.title = "";
+        this.wedTo = "";
+        this.notes = "";
+        this.fate = "";
+        this.children = null;
+        this.nickname = fullname + ", " + ofHisName;
+    }
+    
     public Persona(String fullname, String ofHisName, String father, String eyes, String hair, Lista children) {
         this.fullname = fullname;
         this.ofHisName = ofHisName;

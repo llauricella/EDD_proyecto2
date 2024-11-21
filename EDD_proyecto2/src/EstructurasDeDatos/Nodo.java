@@ -9,16 +9,18 @@ package EstructurasDeDatos;
  * @author Michelle García
  */
 public class Nodo {
-    
+
     private Lista children;
     private Persona person;
     private int height;
 
+    
     public Nodo(Persona person, Lista children) {
         this.person = person;
         this.children = children;
     }
-
+    
+    
     public Nodo(Persona person) {
         this.person = person;
         this.children = new Lista();
@@ -66,6 +68,4 @@ public class Nodo {
         this.children = children;
     }
 
-    
-    
 }

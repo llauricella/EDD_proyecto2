@@ -54,7 +54,7 @@ public class Arbol {
     public Busqueda getBuscar() {
         return buscar;
     }
-    
+
     public boolean isEmpty() {
         boolean empty = false;
         if (getRoot().getChildren().count() < 1) {
@@ -63,10 +63,9 @@ public class Arbol {
         return empty;
     }
 
-    
     public void addChildren(String fatherNickname, String childNickname) {
-        String[] father = fatherNickname.split(",");
-        String[] child = childNickname.split(",");
+        String[] father = fatherNickname.split(", ");
+        String[] child = childNickname.split(", ");
         String fatherName = father[0];
         String fatherMote = father[1];
         String childName = child[0];
@@ -77,9 +76,16 @@ public class Arbol {
         parent.getChildren().add(children);
     }
 
-
     public Lista descendientesPorGeneracion(int height) {
-        Lista encontrados = getBuscar().DFS(getRoot(), height);
+        descendientes(getRoot());
+        Lista encontrados = new Lista();
+
+        for (int i = 0; i < getHashtable().getNodes().count(); i++) {
+            Nodo aux = (Nodo) getHashtable().getNodes().get(i);
+            if (aux.getHeight() == (height - 1)) {
+                encontrados.add(aux);
+            }
+        }
         return encontrados;
     }
 
@@ -94,23 +100,24 @@ public class Arbol {
         Lista encontrados = getBuscar().DFS(getRoot(), height);
         return encontrados;
     }
-   
+
     public Lista encontradosNombre(String search) {
         Lista found = new Lista();
 
         for (int i = 0; i < getHashtable().getNodes().count(); i++) {
-            Nodo aux = (Nodo)getHashtable().getNodes().get(i);
+            Nodo aux = (Nodo) getHashtable().getNodes().get(i);
             if (keyIsEqualName(search, aux)) {
                 found.add(aux);
             }
         }
         return found;
     }
+
     public Lista encontradosTitulo(String search) {
         Lista found = new Lista();
 
         for (int i = 0; i < getHashtable().getNodes().count(); i++) {
-            Nodo aux = (Nodo)getHashtable().getNodes().get(i);
+            Nodo aux = (Nodo) getHashtable().getNodes().get(i);
             if (keyIsEqualTitle(search, aux)) {
                 found.add(aux);
             }
@@ -124,13 +131,11 @@ public class Arbol {
         String mote = value.getPerson().getOfHisName().toLowerCase();
         return name.contains(key) || mote.contains(key);
     }
+
     public boolean keyIsEqualTitle(String search, Nodo value) {
         String key = search.toLowerCase();
         String title = value.getPerson().getTitle().toLowerCase();
         return title.contains(key);
     }
 
-    
-
-    
 }

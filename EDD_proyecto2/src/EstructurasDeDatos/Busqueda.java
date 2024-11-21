@@ -25,7 +25,7 @@ public class Busqueda {
     }
 
     /**
-     * Función que visita todos los nodos dentro del grafo utilizando la
+     * Función que visita todos los nodos dentro del árbol utilizando la
      * búsqueda por profundidad.
      *
      * @param root Nodo donde se iniciará el recorrido.
@@ -53,7 +53,7 @@ public class Busqueda {
                 if (currentNode.getChildren() != null) {
                     for (int i = 0; i < currentNode.getChildren().count(); i++) {
                         Nodo child = (Nodo) currentNode.getChildren().get(i);
-                        if (child != null && !visited.contains(child)) {
+                        if (child != null && !visited.contains(child.getPerson())) {
                             stack.push(child);
                             child.setHeight(currentNode.getHeight() + 1);
                         }

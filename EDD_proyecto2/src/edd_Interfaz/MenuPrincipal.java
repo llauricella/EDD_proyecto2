@@ -211,12 +211,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
 
         Lista nodos = tree.getHashtable().getNodes();
-        for (int i = 1; i < tree.getHashtable().getNodes().count(); i++) {
+        for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
             Nodo aux = (Nodo) nodos.get(i);
             AntepasadoBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
             PersonaBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
         }
-
 
     }//GEN-LAST:event_JSONButtonActionPerformed
 
@@ -266,7 +265,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         String titulo = TituloField.getText();
         if (titulo != null) {
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -276,13 +275,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if (tree != null) {
             String antepasado = (String) AntepasadoBox.getSelectedItem();
             if (antepasado != null) {
-                System.out.println(antepasado);
                 if (graphstream != null) { graphstream.dispose(); }
                 graphstream = new GraphStream(tree);
                 String[] nickname = antepasado.split(", ");
-                System.out.println(nickname[0]+nickname[1]);
                 Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
-                System.out.println(aux.getPerson().getFullname());
+                Lista ancestros = tree.ancestros(aux);
+                System.out.println(ancestros.printList());
                 graphstream.populateGraphbyRoot(aux);
                 graphstream.setVisible(true);
             } else {

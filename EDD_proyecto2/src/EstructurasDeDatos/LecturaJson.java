@@ -147,7 +147,7 @@ public class LecturaJson {
                 } else {
                     JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
+            } 
             arbol = new Arbol(root, hashtable);
             for (int i = 0; i < hashtable.getNodes().count(); i++) {
                 Nodo aux = (Nodo) hashtable.getNodes().get(i);
@@ -167,6 +167,7 @@ public class LecturaJson {
                     }
                 }
             }
+            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);

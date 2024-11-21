@@ -17,7 +17,6 @@ import javax.swing.*;
  * @author Luigi Lauricella
  */
 public class GraphStream extends javax.swing.JFrame implements ViewerListener {
-
     private Arbol tree;
     private Graph graph;
     private final ViewerPipe fromviewer;
@@ -44,6 +43,17 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
 
         PumpViewer();
     }
+    
+    /*public void populateGraphbyAncestros(Lista decendientes) {
+        for (int i = 0; i < decendientes.count(); i++){
+            Nodo padre = (Nodo) decendientes.get(i);
+            Lista children = padre.getChildren();
+            for (int j = 0; j < children.count(); j++){
+                
+            }
+            
+        }
+    }*/
     
     public void populateGraphbyRoot(Nodo root) {
         if (root == null) {
@@ -103,7 +113,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
             graph.addNode(nodeId).setAttribute("ui.label", nodeId + ", " + nodeLabel);
         }
 
-        int xPosition = currentXPosition[level]+= 4;
+        int xPosition = currentXPosition[level]+= 3;
         graph.getNode(nodeId).setAttribute("xyz", xPosition, -level, 0);
 
         Lista children = node.getChildren();
