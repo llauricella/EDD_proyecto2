@@ -23,6 +23,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         AntepasadoBox.removeAllItems();
+        PersonaBox.removeAllItems();
+        TituloBox.removeAllItems();
     }
 
     /**
@@ -48,7 +50,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TituloField = new javax.swing.JTextField();
         AntepasadoBox = new javax.swing.JComboBox<>();
         PersonaField = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        PersonaBox = new javax.swing.JComboBox<>();
+        TituloBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,7 +111,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        PersonaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        TituloBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,23 +122,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(TituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(70, 70, 70))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(TituloButton)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(PersonaField, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(PersonaButton)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                                        .addComponent(PersonaButton))
+                                    .addComponent(PersonaBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TituloBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TituloButton)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
@@ -147,6 +150,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                         .addGap(141, 141, 141)
                                         .addComponent(GeneracionButton))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(101, 101, 101)
@@ -161,10 +165,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(TituloPrincipalLabel)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(178, 178, 178)
+                .addComponent(TituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -181,18 +185,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(PersonaLabel)
                     .addComponent(AntepasadoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PersonaButton)
                     .addComponent(AntepasadoButton)
                     .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloLabel)
-                    .addComponent(GeneraciónLabel))
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
+                .addComponent(TituloLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(GeneraciónLabel)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TituloButton)
                     .addComponent(GeneracionButton)
@@ -219,6 +229,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             System.out.println("ERROR");
         }
         AntepasadoBox.removeAllItems();
+        PersonaBox.removeAllItems();
+        TituloBox.removeAllItems();
         
         Lista nodos = tree.getHashtable().getNodes();
         for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
@@ -259,10 +271,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void PersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonaButtonActionPerformed
         if (tree != null) {
+            PersonaBox.removeAllItems();
             String selectedItem = (String) PersonaField.getText();
             if (selectedItem != null) {
-                tree.encontradosNombre(selectedItem);
-                
+                Lista encontrados = tree.encontradosNombre(selectedItem);
+                if (encontrados != null) {
+                    for (int i = 0; i < encontrados.count(); i++){
+                        Nodo encontrado = (Nodo) encontrados.get(i);
+                        PersonaBox.addItem(encontrado.getPerson().getNickname());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, no se encontro un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, no elegiste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -276,10 +296,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         String titulo = TituloField.getText();
         if (titulo != null) {
-            
+            TituloBox.removeAllItems();
+            String selectedItem = (String) TituloField.getText();
+            if (selectedItem != null) {
+                Lista encontrados = tree.encontradosTitulo(selectedItem);
+                if (encontrados != null) {
+                    for (int i = 0; i < encontrados.count(); i++){
+                        Nodo encontrado = (Nodo) encontrados.get(i);
+                        TituloBox.addItem(encontrado.getPerson().getNickname());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, no se encontro un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR, no elegiste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        TituloField.setText("");
     }//GEN-LAST:event_TituloButtonActionPerformed
 
     private void AntepasadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoButtonActionPerformed
@@ -349,13 +384,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton GeneracionButton;
     private javax.swing.JLabel GeneraciónLabel;
     private javax.swing.JButton JSONButton;
+    private javax.swing.JComboBox<String> PersonaBox;
     private javax.swing.JButton PersonaButton;
     private javax.swing.JTextField PersonaField;
     private javax.swing.JLabel PersonaLabel;
+    private javax.swing.JComboBox<String> TituloBox;
     private javax.swing.JButton TituloButton;
     private javax.swing.JTextField TituloField;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel TituloPrincipalLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }
