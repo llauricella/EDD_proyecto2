@@ -78,7 +78,7 @@ public class Persona {
         this.notes = "";
         this.fate = "";
         this.children = null;
-        this.nickname = fullname + ", " + ofHisName;
+        this.nickname = fullname + ", First";
     }
 
     /**

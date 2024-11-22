@@ -8,6 +8,7 @@ package EstructurasDeDatos;
  * @version 13/11/2024
  * @author Michelle García
  */
+
 public class Arbol {
 
     private Nodo root;
@@ -64,16 +65,52 @@ public class Arbol {
     }
 
     public void addChildren(String fatherNickname, String childNickname) {
+       
         String[] father = fatherNickname.split(", ");
-        String[] child = childNickname.split(", ");
-        String fatherName = father[0];
-        String fatherMote = father[1];
-        String childName = child[0];
-        String childMote = child[1];
+        String[] child = fatherNickname.split(", ");      
 
+        Nodo parent = getHashtable().getNode(father[0], father[1]);
+        Nodo children = getHashtable().getNode(child[0], child[1]);
+        parent.getChildren().add(children);
+        /*
+        if (fatherNickname == null || childNickname == null || fatherNickname.isEmpty() || childNickname.isEmpty()) {
+            System.out.println("Error: Nicknames no pueden ser nulos o vacíos.");
+            return;
+        }
+
+        // Dividir los apodos en nombre y mote
+        String[] fatherParts = fatherNickname.split(", ");
+        String[] childParts = childNickname.split(", ");
+        if (fatherParts.length < 2 || childParts.length < 1) {
+            System.out.println("Error: Formato de nickname inválido.");
+            return;
+        }
+
+        String fatherName = fatherParts[0];
+        String fatherMote = fatherParts.length > 1 ? fatherParts[1] : "";
+        String childName = childParts[0];
+        String childMote = childParts.length > 1 ? childParts[1] : "";
+
+        // Buscar nodos en el hashtable
         Nodo parent = getHashtable().getNode(fatherName, fatherMote);
         Nodo children = getHashtable().getNode(childName, childMote);
+
+        if (parent == null) {
+            System.out.println("Error: Nodo padre no encontrado para " + fatherNickname);
+            return;
+        }
+        if (children == null) {
+            System.out.println("Error: Nodo hijo no encontrado para " + childNickname);
+            return;
+        }
+
+        // Agregar el hijo al nodo padre
+        if (parent.getChildren() == null) {
+            parent.setChildren(new Lista()); // Inicializar lista de hijos si es nula
+        }
         parent.getChildren().add(children);
+
+        System.out.println("Relación padre-hijo añadida: " + fatherNickname + " -> " + childNickname);*/
     }
 
     public Lista descendientesPorGeneracion(int height) {

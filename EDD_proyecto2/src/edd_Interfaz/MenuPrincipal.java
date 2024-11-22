@@ -52,12 +52,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PersonaField = new javax.swing.JTextField();
         PersonaBox = new javax.swing.JComboBox<>();
         TituloBox = new javax.swing.JComboBox<>();
+        GeneracionField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TituloPrincipalLabel.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        TituloPrincipalLabel.setText("Menu de Control");
+        TituloPrincipalLabel.setFont(new java.awt.Font("Swis721 BT", 3, 24)); // NOI18N
+        TituloPrincipalLabel.setForeground(new java.awt.Color(0, 0, 255));
+        TituloPrincipalLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TituloPrincipalLabel.setText("   Menú de Control   ");
+        TituloPrincipalLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255), 3));
 
+        JSONButton.setBackground(new java.awt.Color(0, 0, 255));
+        JSONButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        JSONButton.setForeground(new java.awt.Color(255, 255, 255));
         JSONButton.setText("Cargar Json");
         JSONButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +72,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        ArbolButton.setBackground(new java.awt.Color(0, 0, 255));
+        ArbolButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        ArbolButton.setForeground(new java.awt.Color(255, 255, 255));
         ArbolButton.setText("Mostrar árbol");
         ArbolButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +82,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        PersonaButton.setBackground(new java.awt.Color(0, 0, 255));
+        PersonaButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        PersonaButton.setForeground(new java.awt.Color(255, 255, 255));
         PersonaButton.setText("Buscar");
         PersonaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,8 +92,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        PersonaLabel.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         PersonaLabel.setText("Buscar persona por nombre");
 
+        AntepasadoButton.setBackground(new java.awt.Color(0, 0, 255));
+        AntepasadoButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        AntepasadoButton.setForeground(new java.awt.Color(255, 255, 255));
         AntepasadoButton.setText("Mostrar");
         AntepasadoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,8 +105,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        AntepasadoLabel.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         AntepasadoLabel.setText("Mostrar antepasados por nombre");
 
+        TituloButton.setBackground(new java.awt.Color(0, 0, 255));
+        TituloButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        TituloButton.setForeground(new java.awt.Color(255, 255, 255));
         TituloButton.setText("Buscar");
         TituloButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,117 +118,144 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        TituloLabel.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         TituloLabel.setText("Buscar por titulo");
 
+        GeneracionButton.setBackground(new java.awt.Color(0, 0, 255));
+        GeneracionButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        GeneracionButton.setForeground(new java.awt.Color(255, 255, 255));
         GeneracionButton.setText("Enseñar");
+        GeneracionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GeneracionButtonActionPerformed(evt);
+            }
+        });
 
+        GeneraciónLabel.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         GeneraciónLabel.setText("Enseñar la lista de integrantes de una generación");
 
-        AntepasadoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TituloField.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
 
+        AntepasadoBox.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
+        AntepasadoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        AntepasadoBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AntepasadoBoxActionPerformed(evt);
+            }
+        });
+
+        PersonaField.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
         PersonaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PersonaFieldActionPerformed(evt);
             }
         });
 
+        PersonaBox.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         PersonaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        TituloBox.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
         TituloBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        GeneracionField.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(PersonaField, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(PersonaButton))
-                                    .addComponent(PersonaBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TituloBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TituloButton)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(GeneraciónLabel))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(45, 45, 45)
-                                        .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(AntepasadoButton))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(141, 141, 141)
-                                        .addComponent(GeneracionButton))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(101, 101, 101)
-                                        .addComponent(JSONButton))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addComponent(PersonaLabel)))
-                                .addGap(159, 159, 159)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ArbolButton)
-                                    .addComponent(AntepasadoLabel)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(TituloPrincipalLabel)))
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(JSONButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ArbolButton)
+                .addGap(182, 182, 182))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(181, 181, 181)
                 .addComponent(TituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PersonaButton)
+                .addGap(132, 132, 132))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(GeneracionField, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(GeneracionButton))
+                        .addComponent(TituloBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TituloButton)))
+                    .addComponent(GeneraciónLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PersonaBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(PersonaLabel)
+                                .addGap(44, 44, 44)))
+                        .addGap(132, 132, 132))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AntepasadoButton)
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(AntepasadoLabel)
+                        .addGap(161, 161, 161))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(294, 294, 294)
+                .addComponent(TituloPrincipalLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(46, 46, 46)
                 .addComponent(TituloPrincipalLabel)
-                .addGap(41, 41, 41)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JSONButton)
                     .addComponent(ArbolButton))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PersonaLabel)
-                    .addComponent(AntepasadoLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PersonaButton)
-                    .addComponent(AntepasadoButton)
-                    .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(TituloLabel)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(GeneraciónLabel)
-                        .addGap(18, 18, 18))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(GeneracionButton)
+                            .addComponent(GeneracionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(AntepasadoLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(TituloBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloButton)
-                    .addComponent(GeneracionButton)
-                    .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AntepasadoButton)
+                            .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel)
+                            .addComponent(PersonaLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloButton)
+                            .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PersonaButton)
+                            .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62))))
         );
 
         pack();
@@ -235,8 +283,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Lista nodos = tree.getHashtable().getNodes();
         for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
             Nodo aux = (Nodo) nodos.get(i);
-            AntepasadoBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
+            AntepasadoBox.addItem(aux.getPerson().getNickname());
         }
+        
+        System.out.println(tree.getRoot().getPerson().getFullname());
 
     }//GEN-LAST:event_JSONButtonActionPerformed
 
@@ -252,14 +302,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 if (!graphstream.isVisible()) {
                     graphstream.dispose();
                     graphstream = new GraphStream(tree);
-                    Nodo root = tree.getRoot();
-                    graphstream.populateGraphbyRoot(root);
+                    //Nodo root = tree.getRoot();
+                    //graphstream.populateGraphbyRoot(root);
+                    graphstream.populateGraphbyHashTable(tree);
                     graphstream.setVisible(true);
                 }
             } else {
                 graphstream = new GraphStream(tree);
                 Nodo root = tree.getRoot();
-                graphstream.populateGraphbyRoot(root);
+                //graphstream.populateGraphbyRoot(root);
+                //graphstream.populateGraphbyHashTable(tree);
+                graphstream.populateGraphFromRootWithBFS(root);
                 graphstream.setVisible(true);
             }
 
@@ -342,6 +395,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PersonaFieldActionPerformed
 
+    private void GeneracionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneracionButtonActionPerformed
+        if (tree != null) {
+             try {
+                int height = Integer.parseInt(GeneracionField.getText());
+                
+                Lista resultados = tree.descendientesPorGeneracion(height);
+                if (resultados != null) {
+                    JOptionPane.showMessageDialog(null, resultados.printList(), "Resultados para la generación " + height, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR, no hay generación " + height, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "ERROR, coloca un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR, cargue un documento JSON antes.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_GeneracionButtonActionPerformed
+
+    private void AntepasadoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AntepasadoBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +459,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel AntepasadoLabel;
     private javax.swing.JButton ArbolButton;
     private javax.swing.JButton GeneracionButton;
+    private javax.swing.JTextField GeneracionField;
     private javax.swing.JLabel GeneraciónLabel;
     private javax.swing.JButton JSONButton;
     private javax.swing.JComboBox<String> PersonaBox;
