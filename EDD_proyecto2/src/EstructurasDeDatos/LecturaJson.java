@@ -8,22 +8,19 @@ package EstructurasDeDatos;
  *
  * @author Santiago Castro
  */
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import com.google.gson.*;
+import java.io.*;
+import javax.swing.*;
 
 public class LecturaJson {
 
     /**
      *
+     * @return @throws java.io.IOException
      */
     public Arbol LecturaJson() throws IOException {
         HashTable hashtable = new HashTable(500);
+        Lista listaPersonas = new Lista();
         Nodo root = null;
         Arbol arbol = null;
         var chooser = new JFileChooser();
@@ -42,7 +39,6 @@ public class LecturaJson {
 
                     if (redEntrySet.size() != 1) {
                         JOptionPane.showMessageDialog(null, "ERROR, No es un dato válido", "Error", JOptionPane.ERROR_MESSAGE);
-                        ;
                     }
 
                     var redEntry = redEntrySet.iterator().next();
@@ -58,7 +54,6 @@ public class LecturaJson {
 
                                 if (miembrosEntrySet.size() != 1) {
                                     JOptionPane.showMessageDialog(null, "ERROR, No es un dato válido", "Error", JOptionPane.ERROR_MESSAGE);
-                                    ;
                                 }
 
                                 var miembroEntry = miembrosEntrySet.iterator().next();
@@ -70,7 +65,6 @@ public class LecturaJson {
                                 String father = "";
                                 String eyes = "";
                                 String hair = "";
-
                                 if (caracteristicasElement.isJsonArray()) {
                                     JsonArray caracteristicas = caracteristicasElement.getAsJsonArray();
 
@@ -80,12 +74,6 @@ public class LecturaJson {
 
                                             for (String key : caracteristica.keySet()) {
                                                 JsonElement value = caracteristica.get(key);
-                                                if (key.equals("Father to") && value.isJsonArray()) {
-                                                    JsonArray hijosArray = value.getAsJsonArray();
-                                                    for (JsonElement hijo : hijosArray) {
-                                                        children.add(hijo.getAsString());
-                                                    }
-                                                }
                                                 String valor = value.isJsonArray() ? value.getAsJsonArray().toString() : value.getAsString();
                                                 switch (key) {
                                                     case "Of his name" ->
@@ -100,57 +88,88 @@ public class LecturaJson {
                                                     case "Of hair" ->
                                                         hair = valor;
                                                 }
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
-                                    continue;
-                                }
+                                                if (key.equals("Father to") && value.isJsonArray()) {
+                                                    JsonArray hijosArray = value.getAsJsonArray();
+                                                    for (JsonElement hijo : hijosArray) {
+                                                        children.add(hijo.getAsString());
+                                                        Persona persona = new Persona(hijo.getAsString(), nombreMiembro);
+                                                        listaPersonas.add(persona);
 
-                                Persona persona = new Persona(nombreMiembro, ofHisName, father, eyes, hair, children);
-
-                                for (JsonElement caracteresElement : caracteristicasElement.getAsJsonArray()) {
-                                    JsonObject caracteristica = caracteresElement.getAsJsonObject();
-
-                                    for (String key : caracteristica.keySet()) {
-                                        JsonElement value = caracteristica.get(key);
-                                        String valor = value.isJsonArray() ? value.getAsJsonArray().toString() : value.getAsString();
-
-                                        switch (key) {
-                                            case "Known throughout as" ->
-                                                persona.setKnownAs(valor);
-                                            case "Held title" ->
-                                                persona.setTitle(valor);
-                                            case "Wed to" ->
-                                                persona.setWedTo(valor);
-                                            case "Notes" ->
-                                                persona.setNotes(valor);
-                                            case "Fate" ->
-                                                persona.setFate(valor);
-                                            case "Born to" -> {
-                                                if (!father.equals(valor)) {
-                                                    persona.setMother(valor);
-
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+                                    Persona persona;
+                                    if ("[Unknown]".equals(father)) {
+                                        persona = new Persona(nombreMiembro, ofHisName, "[Unknown]", eyes, hair, children);
+                                        listaPersonas.add(persona);
+                                    } else {
+                                        persona = new Persona(nombreMiembro, ofHisName, father, eyes, hair, children);
+                                    }
+                                    for (int i = 0; i < listaPersonas.count(); i++) {
+                                        Persona aux = (Persona) listaPersonas.get(i);
+                                        String[] persona1 = nombreMiembro.split(" ");
+                                        String personaName = persona1[0];
+                                        if (aux.getFullname().equals(personaName)) {
+                                            aux.setFullname(persona.getFullname());
+                                            aux.setOfHisName(persona.getOfHisName());
+                                            aux.setFather(persona.getFather());
+                                            aux.setEyes(persona.getEyes());
+                                            aux.setHair(persona.getHair());
+                                            aux.setChildren(persona.getChildren());
+                                            for (JsonElement caracteresElement : caracteristicasElement.getAsJsonArray()) {
+                                                JsonObject caracteristica = caracteresElement.getAsJsonObject();
+
+                                                for (String key : caracteristica.keySet()) {
+                                                    JsonElement value = caracteristica.get(key);
+                                                    String valor = value.isJsonArray() ? value.getAsJsonArray().toString() : value.getAsString();
+
+                                                    switch (key) {
+                                                        case "Known throughout as" ->
+                                                            aux.setKnownAs(valor);
+                                                        case "Held title" ->
+                                                            aux.setTitle(valor);
+                                                        case "Wed to" ->
+                                                            aux.setWedTo(valor);
+                                                        case "Notes" ->
+                                                            aux.setNotes(valor);
+                                                        case "Fate" ->
+                                                            aux.setFate(valor);
+                                                        case "Born to" -> {
+                                                            if (!father.equals(valor)) {
+                                                                aux.setMother(valor);
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Error, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
+
                                 }
-                                Nodo nuevoNodo = new Nodo(persona);
-                                hashtable.addNode(nuevoNodo);
-                                if (root == null) {
-                                    root = nuevoNodo;
-                                }
+
                             } else {
-                                JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Error, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            for (int i = 0; i < listaPersonas.count(); i++) {
+                Persona aux = (Persona) listaPersonas.get(i);
+                Nodo nuevoNodo = new Nodo(aux);
+                hashtable.addNode(nuevoNodo);
+                if (root == null) {
+                    root = nuevoNodo;
                 }
             }
             arbol = new Arbol(root, hashtable);
@@ -174,8 +193,9 @@ public class LecturaJson {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        /*System.out.println(listaPersonas.printPersona());*/
         return arbol;
     }
 }

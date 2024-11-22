@@ -24,10 +24,6 @@ public class HashTable {
         this.capacity = capacity;
         this.nodes = new Lista();
         this.table = new Lista[capacity];
-
-        for (int i = 0; i < capacity; i++) {
-            table[i] = new Lista();
-        }
     }
 
     /**
@@ -44,7 +40,8 @@ public class HashTable {
             hash += nickname.charAt(i);
         }
 
-        hash = hash / 47;
+        hash = hash / 7;
+
         return hash;
     }
 
@@ -57,20 +54,26 @@ public class HashTable {
      * @return
      */
     public Nodo getNode(String fullname, String mote) {
-        String nickname = fullname + "," + mote;
+        String nickname = fullname + ", " + mote;
         int code = hash(nickname);
         Nodo found = null;
 
-        if (getTable()[code].getValue() != null) {
-            found = (Nodo) getTable()[code].getValue().getValue();
+        if (code > getCapacity()) {
+            code = code / 7;
         }
-        if (getTable()[code].count() > 1) {
-            Lista aux = getTable()[code];
-            for (int i = 0; i < getTable()[code].count(); i++) {
-                Nodo act = (Nodo) aux.get(i);
-                if (act.getPerson().getNickname().equals(nickname)) {
-                    found = act;
-                    break;
+
+        if (getTable()[code] != null) {
+            if (getTable()[code].getValue() != null) {
+                found = (Nodo) getTable()[code].getValue().getValue();
+            }
+            if (getTable()[code].count() > 1) {
+                Lista aux = getTable()[code];
+                for (int i = 0; i < getTable()[code].count(); i++) {
+                    Nodo act = (Nodo) aux.get(i);
+                    if (act.getPerson().getNickname().equals(nickname)) {
+                        found = act;
+                        break;
+                    }
                 }
             }
         }
@@ -83,25 +86,43 @@ public class HashTable {
      *
      *
      * @param newNode
+     * @param code
      */
     public void addNode(Nodo newNode) {
         String toHash = newNode.getPerson().getNickname();
         int code = hash(toHash);
+        Lista aux = new Lista();
 
-        if (code < getCapacity()) {
-            getTable()[code].add(newNode);
+        if (code > getCapacity()) {
+            code = code / 7;
+        }
+
+        if (getTable()[code] == null) {
+            aux.add(newNode);
+            getTable()[code] = aux;
         } else {
-            code = code / 2;
             getTable()[code].add(newNode);
         }
 
         getNodes().add(newNode);
     }
 
+    /**
+     * Función para agregar un nodo al hashtable
+     *
+     *
+     * @return
+     */
     public Lista getNodes() {
         return nodes;
     }
 
+    /**
+     * Función para agregar un nodo al hashtable
+     *
+     *
+     * @param nodes
+     */
     public void setNodes(Lista nodes) {
         this.nodes = nodes;
     }

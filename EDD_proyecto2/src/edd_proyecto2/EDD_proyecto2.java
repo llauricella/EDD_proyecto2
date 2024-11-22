@@ -4,24 +4,21 @@
  */
 package edd_proyecto2;
 
-import EstructurasDeDatos.Arbol;
-import EstructurasDeDatos.LecturaJson;
-import java.io.IOException;
+import edd_Interfaz.MenuPrincipal;
 
 /**
  *
- * @author lalau
+ * @author Luigi Lauricella
  */
-
 public class EDD_proyecto2 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
-        LecturaJson read = new LecturaJson();
-        Arbol arbol = read.LecturaJson();
-        System.out.println(arbol.descendientesPorGeneracion(10).printList());
+    public static void main(String[] args){
+        
+        MenuPrincipal menuinicial = new MenuPrincipal();
+        menuinicial.setLocationRelativeTo(null);
+        menuinicial.show();
     }
-    
 }

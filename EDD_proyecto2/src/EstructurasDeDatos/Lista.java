@@ -186,13 +186,14 @@ public class Lista {
             var Next = (Nodo) get(i);
             if (Next != null) {
                 //txt = txt + Next.getPerson().leer()+ "\n";
-                txt = txt + Next.getPerson().getFullname() + "\n";
+                txt = txt + Next.getPerson().getNickname() + "\n";
             }
         }
         return txt;
     }
 
     /**
+     * Devuelve el valor del elemento de la lista
      * @return the value
      */
     public ElementoLista getValue() {
