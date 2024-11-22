@@ -10,20 +10,20 @@ package EstructurasDeDatos;
  */
 public class Nodo {
 
-    private Lista children;
+    private Lista decendientes;
     private Persona person;
     private int height;
 
     
     public Nodo(Persona person, Lista children) {
         this.person = person;
-        this.children = children;
+        this.decendientes = children;
     }
     
     
     public Nodo(Persona person) {
         this.person = person;
-        this.children = new Lista();
+        this.decendientes = new Lista();
     }
 
     /**
@@ -58,14 +58,14 @@ public class Nodo {
      * @return the children
      */
     public Lista getChildren() {
-        return children;
+        return decendientes;
     }
 
     /**
      * @param children the children to set
      */
     public void setChildren(Lista children) {
-        this.children = children;
+        this.decendientes = children;
     }
 
 }

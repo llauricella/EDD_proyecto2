@@ -90,6 +90,7 @@ public class LecturaJson {
                                                     case "Of hair" ->
                                                         hair = valor;
                                                 }
+                                                
                                                 if (key.equals("Father to") && value.isJsonArray()) {
                                                     JsonArray hijosArray = value.getAsJsonArray();
                                                     for (JsonElement hijo : hijosArray) {
@@ -182,11 +183,11 @@ public class LecturaJson {
 
                 for (int i = 0; i < hashtable.getNodes().count(); i++) {
                     Nodo aux = (Nodo) hashtable.getNodes().get(i);
-                    System.out.println(aux.getPerson().getNickname());
-                    // Axel -> no tiene hijos
+                    // Axel -> no tiene hijos. es hijo de Orys.
+                    // Serac -> Reginald, William, Steffon, Paradraic, Flynn. es hijo de Orys.
                     for (int j = 0; j < hashtable.getNodes().count(); j++) {
                         Nodo aux2 = (Nodo) hashtable.getNodes().get(j);
-                        if (aux.getPerson().getChildren() != null) {
+                        if (aux.getPerson().getChildren().count() > 1) {
                             if (aux.getPerson().getFullname().equals(aux2.getPerson().getFather())) {
                                 arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
                             } else if (aux.getPerson().getKnownAs().equals(aux2.getPerson().getFather())) {
@@ -197,8 +198,10 @@ public class LecturaJson {
                                     arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
                                 }
                             }
+                        } else {
+                            System.out.println("La persona no tiene hijos");
                         }
-                        System.out.println(aux.getChildren().printList());
+                        //System.out.println(aux.getChildren().printList());
                     }
                 }
             }

@@ -58,7 +58,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
             }
 
             String nodeId = node.getPerson().getNickname();
-            System.out.println(nodeId);
+            //System.out.println(nodeId);
 
             if (graph.getNode(nodeId) == null) {
                 graph.addNode(nodeId).setAttribute("ui.label", nodeId);
@@ -77,7 +77,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
                     continue;
                 }
 
-                System.out.println(child.getPerson().getNickname());
+                //System.out.println(child.getPerson().getNickname());
 
                 String childId = child.getPerson().getNickname();
 

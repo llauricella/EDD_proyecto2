@@ -304,7 +304,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     graphstream = new GraphStream(tree);
                     //Nodo root = tree.getRoot();
                     //graphstream.populateGraphbyRoot(root);
-                    graphstream.populateGraphbyHashTable(tree);
+                    //graphstream.populateGraphbyHashTable(tree);
                     graphstream.setVisible(true);
                 }
             } else {
@@ -312,7 +312,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 Nodo root = tree.getRoot();
                 //graphstream.populateGraphbyRoot(root);
                 //graphstream.populateGraphbyHashTable(tree);
-                graphstream.populateGraphFromRootWithBFS(root);
+                graphstream.populateGraphbyHashTable(tree);
                 graphstream.setVisible(true);
             }
 
