@@ -227,7 +227,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(GeneraciónLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(GeneracionButton)
                             .addComponent(GeneracionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -283,8 +283,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Lista nodos = tree.getHashtable().getNodes();
         for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
             Nodo aux = (Nodo) nodos.get(i);
-            AntepasadoBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
+            AntepasadoBox.addItem(aux.getPerson().getNickname());
         }
+        
+        System.out.println(tree.getRoot().getPerson().getFullname());
 
     }//GEN-LAST:event_JSONButtonActionPerformed
 
@@ -300,14 +302,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 if (!graphstream.isVisible()) {
                     graphstream.dispose();
                     graphstream = new GraphStream(tree);
-                    Nodo root = tree.getRoot();
-                    graphstream.populateGraphbyRoot(root);
+                    //Nodo root = tree.getRoot();
+                    //graphstream.populateGraphbyRoot(root);
+                    graphstream.populateGraphbyHashTable(tree);
                     graphstream.setVisible(true);
                 }
             } else {
                 graphstream = new GraphStream(tree);
                 Nodo root = tree.getRoot();
-                graphstream.populateGraphbyRoot(root);
+                //graphstream.populateGraphbyRoot(root);
+                //graphstream.populateGraphbyHashTable(tree);
+                graphstream.populateGraphFromRootWithBFS(root);
                 graphstream.setVisible(true);
             }
 

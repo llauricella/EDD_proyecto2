@@ -4,8 +4,6 @@
  */
 package EstructurasDeDatos;
 
-import EstructurasDeDatos.Lista;
-
 /**
  * @version 13/11/2024
  * @author Michelle García
@@ -80,7 +78,7 @@ public class Persona {
         this.notes = "";
         this.fate = "";
         this.children = null;
-        this.nickname = fullname + ", " + ofHisName;
+        this.nickname = fullname + ", First";
     }
 
     /**

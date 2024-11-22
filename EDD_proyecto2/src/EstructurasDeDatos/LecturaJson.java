@@ -66,6 +66,7 @@ public class LecturaJson {
                                 String father = "";
                                 String eyes = "";
                                 String hair = "";
+
                                 if (caracteristicasElement.isJsonArray()) {
                                     JsonArray caracteristicas = caracteristicasElement.getAsJsonArray();
 
@@ -93,9 +94,8 @@ public class LecturaJson {
                                                     JsonArray hijosArray = value.getAsJsonArray();
                                                     for (JsonElement hijo : hijosArray) {
                                                         children.add(hijo.getAsString());
-                                                        //Persona persona = new Persona(hijo.getAsString(), nombreMiembro);
-                                                        //listaPersonas.add(persona);
-
+                                                        Persona persona = new Persona(hijo.getAsString(), nombreMiembro);
+                                                        listaPersonas.add(persona);
                                                     }
                                                 }
                                             }
@@ -119,6 +119,7 @@ public class LecturaJson {
                                             aux.setEyes(persona.getEyes());
                                             aux.setHair(persona.getHair());
                                             aux.setChildren(persona.getChildren());
+                                            aux.setNickname(aux.getFullname() + ", " + aux.getOfHisName());
                                             for (JsonElement caracteresElement : caracteristicasElement.getAsJsonArray()) {
                                                 JsonObject caracteristica = caracteresElement.getAsJsonObject();
 
@@ -144,6 +145,7 @@ public class LecturaJson {
                                                             }
                                                         }
                                                     }
+
                                                 }
                                             }
                                         }
@@ -164,31 +166,39 @@ public class LecturaJson {
                 } else {
                     JOptionPane.showMessageDialog(null, "Error, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-            for (int i = 0; i < listaPersonas.count(); i++) {
-                Persona aux = (Persona) listaPersonas.get(i);
-                Nodo nuevoNodo = new Nodo(aux);
-                hashtable.addNode(nuevoNodo);
-                if (root == null) {
-                    root = nuevoNodo;
+
+                for (int i = 0; i < listaPersonas.count(); i++) {
+                    Persona aux = (Persona) listaPersonas.get(i);
+                    Nodo nuevoNodo = new Nodo(aux);
+                    hashtable.addNode(nuevoNodo);
+                    if (root == null) {
+                        if ("[Unknown]".equals(nuevoNodo.getPerson().getFather())) {
+                            root = nuevoNodo;
+                        }
+                    }
                 }
-            }
-            arbol = new Arbol(root, hashtable);
-            for (int i = 0; i < hashtable.getNodes().count(); i++) {
-                Nodo aux = (Nodo) hashtable.getNodes().get(i);
-                if (aux.getPerson().getChildren().count() > 0) {
+
+                arbol = new Arbol(root, hashtable);
+
+                for (int i = 0; i < hashtable.getNodes().count(); i++) {
+                    Nodo aux = (Nodo) hashtable.getNodes().get(i);
+                    System.out.println(aux.getPerson().getNickname());
+                    // Axel -> no tiene hijos
                     for (int j = 0; j < hashtable.getNodes().count(); j++) {
                         Nodo aux2 = (Nodo) hashtable.getNodes().get(j);
-                        if (aux.getPerson().getFullname().equals(aux2.getPerson().getFather())) {
-                            arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
-                        } else if (aux.getPerson().getKnownAs().equals(aux2.getPerson().getFather())) {
-                            arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
-                        } else {
-                            String nickname = aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName() + " of his name";
-                            if (nickname.equals(aux2.getPerson().getFather())) {
+                        if (aux.getPerson().getChildren() != null) {
+                            if (aux.getPerson().getFullname().equals(aux2.getPerson().getFather())) {
                                 arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                            } else if (aux.getPerson().getKnownAs().equals(aux2.getPerson().getFather())) {
+                                arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                            } else {
+                                String nickname = aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName() + " of his name";
+                                if (nickname.equals(aux2.getPerson().getFather())) {
+                                    arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                                }
                             }
                         }
+                        System.out.println(aux.getChildren().printList());
                     }
                 }
             }
