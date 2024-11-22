@@ -128,7 +128,7 @@ public class Arbol {
     public boolean keyIsEqualName(String search, Nodo value) {
         String key = search.toLowerCase();
         String name = value.getPerson().getFullname().toLowerCase();
-        String mote = value.getPerson().getOfHisName().toLowerCase();
+        String mote = value.getPerson().getKnownAs().toLowerCase();
         return name.contains(key) || mote.contains(key);
     }
 
