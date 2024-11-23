@@ -8,6 +8,7 @@ package EstructurasDeDatos;
  * @version 13/11/2024
  * @author Michelle García
  */
+
 public class Arbol {
 
     private Nodo root;
@@ -64,15 +65,12 @@ public class Arbol {
     }
 
     public void addChildren(String fatherNickname, String childNickname) {
+       
         String[] father = fatherNickname.split(", ");
-        String[] child = childNickname.split(", ");
-        String fatherName = father[0];
-        String fatherMote = father[1];
-        String childName = child[0];
-        String childMote = child[1];
-
-        Nodo parent = getHashtable().getNode(fatherName, fatherMote);
-        Nodo children = getHashtable().getNode(childName, childMote);
+        String[] child = fatherNickname.split(", ");      
+        
+        Nodo parent = getHashtable().getNode(father[0], father[1]);
+        Nodo children = getHashtable().getNode(child[0], child[1]);
         parent.getChildren().add(children);
     }
 

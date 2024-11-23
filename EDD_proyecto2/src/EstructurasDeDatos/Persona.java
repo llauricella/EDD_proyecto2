@@ -4,8 +4,6 @@
  */
 package EstructurasDeDatos;
 
-import EstructurasDeDatos.Lista;
-
 /**
  * @version 13/11/2024
  * @author Michelle García
@@ -35,6 +33,23 @@ public class Persona {
      * @param children
      */
     
+    
+    public Persona(String fullname) {
+        this.fullname = fullname;
+        this.ofHisName = "";
+        this.father = "";
+        this.eyes = "";
+        this.hair = "";
+        this.knownAs = "";
+        this.mother = "";
+        this.title = "";
+        this.wedTo = "";
+        this.notes = "";
+        this.fate = "";
+        this.children = null;
+        this.nickname = fullname + ", First";
+    }
+
     public Persona(String fullname, String ofHisName, String father, String eyes, String hair) {
         this.fullname = fullname;
         this.ofHisName = ofHisName;
@@ -80,7 +95,7 @@ public class Persona {
         this.notes = "";
         this.fate = "";
         this.children = null;
-        this.nickname = fullname + ", " + ofHisName;
+        this.nickname = fullname + ", First";
     }
 
     /**

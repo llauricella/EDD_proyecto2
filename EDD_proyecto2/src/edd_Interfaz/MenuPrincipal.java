@@ -227,7 +227,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(GeneraciónLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(GeneracionButton)
                             .addComponent(GeneracionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -283,8 +283,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Lista nodos = tree.getHashtable().getNodes();
         for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
             Nodo aux = (Nodo) nodos.get(i);
-            AntepasadoBox.addItem(aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName());
+            AntepasadoBox.addItem(aux.getPerson().getNickname());
         }
+        
+        System.out.println(tree.getRoot().getPerson().getFullname());
 
     }//GEN-LAST:event_JSONButtonActionPerformed
 
@@ -300,14 +302,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 if (!graphstream.isVisible()) {
                     graphstream.dispose();
                     graphstream = new GraphStream(tree);
-                    Nodo root = tree.getRoot();
-                    graphstream.populateGraphbyRoot(root);
+                    //Nodo root = tree.getRoot();
+                    //graphstream.populateGraphbyRoot(root);
+                    graphstream.populateGraph(tree);
                     graphstream.setVisible(true);
                 }
             } else {
                 graphstream = new GraphStream(tree);
                 Nodo root = tree.getRoot();
-                graphstream.populateGraphbyRoot(root);
+                graphstream.populateGraph(tree);
+                //graphstream.populateGraphbyHashTable(tree);
+                //graphstream.populateGraphbyHashTable(tree);
                 graphstream.setVisible(true);
             }
 
@@ -366,19 +371,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TituloButtonActionPerformed
 
     private void AntepasadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoButtonActionPerformed
-        Nodo aux;
         if (tree != null) {
             String antepasado = (String) AntepasadoBox.getSelectedItem();
             if (antepasado != null) {
                 if (graphstream != null) { graphstream.dispose(); }
                 graphstream = new GraphStream(tree);
                 String[] nickname = antepasado.split(", ");
-                if (nickname.length > 1){
-                    aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
-                } else {
-                    aux = tree.getHashtable().getNode(nickname[0],"");
-                }
-                
+                Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
                 Lista ancestros = tree.ancestros(aux);
                 System.out.println(ancestros.printList());
                 graphstream.populateGraphbyAncestros(ancestros);

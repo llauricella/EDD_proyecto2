@@ -191,6 +191,20 @@ public class Lista {
         }
         return txt;
     }
+    
+    public String printChild() {
+        String txt = "";
+
+        for (int i = 0; i < count(); i++) {
+
+            var Next = (String) get(i);
+            if (Next != null) {
+                //txt = txt + Next.getPerson().leer()+ "\n";
+                txt = txt + Next + "\n";
+            }
+        }
+        return txt;
+    }
 
     /**
      * Devuelve el valor del elemento de la lista
