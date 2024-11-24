@@ -23,6 +23,7 @@ public class Persona {
     private String fate;
     private String nickname;
     private Lista children;
+
     /**
      *
      * @param fullname
@@ -32,13 +33,14 @@ public class Persona {
      * @param eyes
      * @param children
      */
-    
-    public Persona(String fullname, String ofHisName, String father, String eyes, String hair) {
+
+    //LecturaJson sola
+    public Persona(String fullname) {
         this.fullname = fullname;
-        this.ofHisName = ofHisName;
-        this.father = father;
-        this.eyes = eyes;
-        this.hair = hair;
+        this.ofHisName = "";
+        this.father = "";
+        this.eyes = "";
+        this.hair = "";
         this.knownAs = "";
         this.mother = "";
         this.title = "";
@@ -48,7 +50,24 @@ public class Persona {
         this.children = null;
         this.nickname = fullname + ", " + ofHisName;
     }
-    
+
+
+    public Persona(String fullname, String father) {
+        this.fullname = fullname;
+        this.ofHisName = " ";
+        this.father = father;
+        this.eyes = "";
+        this.hair = "";
+        this.knownAs = "";
+        this.mother = "";
+        this.title = "";
+        this.wedTo = "";
+        this.notes = "";
+        this.fate = "";
+        this.children = null;
+        this.nickname = fullname + ", " + ofHisName;
+    }
+
     public Persona(String fullname, String ofHisName, String father, String eyes, String hair, Lista children) {
         this.fullname = fullname;
         this.ofHisName = ofHisName;
@@ -63,22 +82,6 @@ public class Persona {
         this.fate = "";
         this.children = children;
         this.nickname = fullname + ", " + ofHisName;
-    }
-
-        public Persona(String fullname, String father) {
-        this.fullname = fullname;
-        this.ofHisName = "";
-        this.father = father;
-        this.eyes = "";
-        this.hair = "";
-        this.knownAs = "";
-        this.mother = "";
-        this.title = "";
-        this.wedTo = "";
-        this.notes = "";
-        this.fate = "";
-        this.children = null;
-        this.nickname = fullname + ", First";
     }
 
     /**
