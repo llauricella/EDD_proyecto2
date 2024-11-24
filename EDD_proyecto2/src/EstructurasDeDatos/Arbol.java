@@ -83,6 +83,7 @@ public class Arbol {
             Nodo aux = (Nodo) getHashtable().getNodes().get(i);
             if (aux.getHeight() == (height - 1)) {
                 encontrados.add(aux);
+                
             }
         }
         return encontrados;
@@ -97,6 +98,15 @@ public class Arbol {
         descendientes(getRoot());
         int height = descendant.getHeight() - 1;
         Lista encontrados = getBuscar().DFS(getRoot(), height);
+        
+        for (int i = 0; i < encontrados.count(); i++){
+            Nodo aux = (Nodo)encontrados.get(i);
+            System.out.println(aux.getHeight());
+            if (aux.getHeight() == height && aux != descendant){
+                encontrados.remove(i);
+            }
+        }
+        
         return encontrados;
     }
 

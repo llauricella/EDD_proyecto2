@@ -25,6 +25,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         AntepasadoBox.removeAllItems();
         PersonaBox.removeAllItems();
         TituloBox.removeAllItems();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -53,6 +54,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PersonaBox = new javax.swing.JComboBox<>();
         TituloBox = new javax.swing.JComboBox<>();
         GeneracionField = new javax.swing.JTextField();
+        GenerarGrafoButton = new javax.swing.JButton();
+        TituloDetalleButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,6 +161,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TituloBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         GeneracionField.setFont(new java.awt.Font("Segoe UI Semilight", 2, 12)); // NOI18N
+        GeneracionField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GeneracionFieldActionPerformed(evt);
+            }
+        });
+
+        GenerarGrafoButton.setBackground(new java.awt.Color(0, 0, 255));
+        GenerarGrafoButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        GenerarGrafoButton.setForeground(new java.awt.Color(255, 255, 255));
+        GenerarGrafoButton.setText("Ver descendencia");
+        GenerarGrafoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerarGrafoButtonActionPerformed(evt);
+            }
+        });
+
+        TituloDetalleButton.setBackground(new java.awt.Color(0, 0, 255));
+        TituloDetalleButton.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
+        TituloDetalleButton.setForeground(new java.awt.Color(255, 255, 255));
+        TituloDetalleButton.setText("Ver detalle");
+        TituloDetalleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TituloDetalleButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,11 +198,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(ArbolButton)
                 .addGap(182, 182, 182))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(TituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(TituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(PersonaButton)
                 .addGap(132, 132, 132))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -212,6 +244,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(294, 294, 294)
                 .addComponent(TituloPrincipalLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(TituloDetalleButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(GenerarGrafoButton)
+                .addGap(169, 169, 169))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,25 +275,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(AntepasadoButton)
                             .addComponent(AntepasadoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TituloLabel)
-                            .addComponent(PersonaLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TituloBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TituloButton)
-                            .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PersonaButton)
-                            .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel)
+                    .addComponent(PersonaLabel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PersonaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloButton)
+                    .addComponent(TituloField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PersonaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PersonaButton))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GenerarGrafoButton)
+                    .addComponent(TituloDetalleButton))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -279,15 +316,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         AntepasadoBox.removeAllItems();
         PersonaBox.removeAllItems();
         TituloBox.removeAllItems();
-        
-        Lista nodos = tree.getHashtable().getNodes();
-        for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
-            Nodo aux = (Nodo) nodos.get(i);
-            AntepasadoBox.addItem(aux.getPerson().getNickname());
-        }
-        
-        System.out.println(tree.getRoot().getPerson().getFullname());
 
+        if (tree != null) {
+            Lista nodos = tree.getHashtable().getNodes();
+            if (nodos != null) {
+                for (int i = 0; i < tree.getHashtable().getNodes().count(); i++) {
+                    Nodo aux = (Nodo) nodos.get(i);
+                    AntepasadoBox.addItem(aux.getPerson().getNickname());
+                }
+            }
+        }
     }//GEN-LAST:event_JSONButtonActionPerformed
 
     private void ArbolButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolButtonActionPerformed
@@ -302,17 +340,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 if (!graphstream.isVisible()) {
                     graphstream.dispose();
                     graphstream = new GraphStream(tree);
-                    //Nodo root = tree.getRoot();
-                    //graphstream.populateGraphbyRoot(root);
-                    graphstream.populateGraph(tree);
+                    Nodo root = tree.getRoot();
+                    graphstream.populateGraphbyRoot(root);
                     graphstream.setVisible(true);
                 }
             } else {
                 graphstream = new GraphStream(tree);
                 Nodo root = tree.getRoot();
-                graphstream.populateGraph(tree);
-                //graphstream.populateGraphbyHashTable(tree);
-                //graphstream.populateGraphbyHashTable(tree);
+                graphstream.populateGraphbyRoot(root);
                 graphstream.setVisible(true);
             }
 
@@ -329,7 +364,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             if (selectedItem != null) {
                 Lista encontrados = tree.encontradosNombre(selectedItem);
                 if (encontrados != null) {
-                    for (int i = 0; i < encontrados.count(); i++){
+                    for (int i = 0; i < encontrados.count(); i++) {
                         Nodo encontrado = (Nodo) encontrados.get(i);
                         PersonaBox.addItem(encontrado.getPerson().getNickname());
                     }
@@ -354,9 +389,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             if (selectedItem != null) {
                 Lista encontrados = tree.encontradosTitulo(selectedItem);
                 if (encontrados != null) {
-                    for (int i = 0; i < encontrados.count(); i++){
+                    for (int i = 0; i < encontrados.count(); i++) {
                         Nodo encontrado = (Nodo) encontrados.get(i);
-                        TituloBox.addItem(encontrado.getPerson().getNickname());
+                        if (encontrado != null) {
+                            TituloBox.addItem(encontrado.getPerson().getNickname());
+                        }
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "ERROR, no se encontro un nombre", "Error", JOptionPane.ERROR_MESSAGE);
@@ -374,13 +411,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if (tree != null) {
             String antepasado = (String) AntepasadoBox.getSelectedItem();
             if (antepasado != null) {
-                if (graphstream != null) { graphstream.dispose(); }
+                if (graphstream != null) {
+                    graphstream.dispose();
+                }
                 graphstream = new GraphStream(tree);
                 String[] nickname = antepasado.split(", ");
                 Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
                 Lista ancestros = tree.ancestros(aux);
-                System.out.println(ancestros.printList());
-                graphstream.populateGraphbyAncestros(ancestros);
+                graphstream.populateGraphbyAncestors(ancestros, antepasado);
                 graphstream.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);
@@ -397,16 +435,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void GeneracionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneracionButtonActionPerformed
         if (tree != null) {
-             try {
+            try {
                 int height = Integer.parseInt(GeneracionField.getText());
-                
-                Lista resultados = tree.descendientesPorGeneracion(height);
-                if (resultados != null) {
-                    JOptionPane.showMessageDialog(null, resultados.printList(), "Resultados para la generación " + height, JOptionPane.INFORMATION_MESSAGE);
+
+                if (height > 0) {
+                    Lista resultados = tree.descendientesPorGeneracion(height);
+                    if (resultados != null) {
+                        JOptionPane.showMessageDialog(null, resultados.printList(), "Resultados para la generación " + height, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR, no hay generación " + height, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "ERROR, no hay generación " + height, "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Introduzca una generación válida", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "ERROR, coloca un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -418,6 +460,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void AntepasadoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AntepasadoBoxActionPerformed
+
+    private void GenerarGrafoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarGrafoButtonActionPerformed
+        String persona = (String) PersonaBox.getSelectedItem();
+        if (persona != null) {
+            if (graphstream != null) {
+                graphstream.dispose();
+            }
+            graphstream = new GraphStream(tree);
+            String[] nickname = persona.split(", ");
+            Nodo rutaNueva = tree.getHashtable().getNode(nickname[0], nickname[1]);
+            graphstream.populateGraphbyRoot(rutaNueva);
+            graphstream.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR, la persona prupuesta es invalida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_GenerarGrafoButtonActionPerformed
+
+    private void TituloDetalleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloDetalleButtonActionPerformed
+        String nombre = (String) TituloBox.getSelectedItem();
+        if (nombre != null) {
+            String[] nickname = nombre.split(", ");
+            if ("".equals(tree.getHashtable().getNode(nickname[0], nickname[1]).getPerson().getEyes())) {
+                Persona persona = tree.getHashtable().getNode(nickname[0], nickname[1]).getPerson();
+                JOptionPane.showMessageDialog(null, "Fullname: " + persona.getFullname(), nombre, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                String resultados = tree.getHashtable().getNode(nickname[0], nickname[1]).getPerson().leer();
+                JOptionPane.showMessageDialog(null, resultados, nombre, JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_TituloDetalleButtonActionPerformed
+
+    private void GeneracionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneracionFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GeneracionFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,6 +537,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton GeneracionButton;
     private javax.swing.JTextField GeneracionField;
     private javax.swing.JLabel GeneraciónLabel;
+    private javax.swing.JButton GenerarGrafoButton;
     private javax.swing.JButton JSONButton;
     private javax.swing.JComboBox<String> PersonaBox;
     private javax.swing.JButton PersonaButton;
@@ -468,6 +545,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel PersonaLabel;
     private javax.swing.JComboBox<String> TituloBox;
     private javax.swing.JButton TituloButton;
+    private javax.swing.JButton TituloDetalleButton;
     private javax.swing.JTextField TituloField;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel TituloPrincipalLabel;

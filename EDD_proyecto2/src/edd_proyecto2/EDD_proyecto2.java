@@ -19,6 +19,7 @@ public class EDD_proyecto2 {
         
         MenuPrincipal menuinicial = new MenuPrincipal();
         menuinicial.setLocationRelativeTo(null);
+        menuinicial.setResizable(false);
         menuinicial.show();
     }
 }

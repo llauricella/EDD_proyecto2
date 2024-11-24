@@ -41,165 +41,77 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         fromviewer = viewer.newViewerPipe();
         fromviewer.addViewerListener(this);
         fromviewer.addSink(graph);
-        viewer.enableAutoLayout();
 
         PumpViewer();
     }
 
-    public void populateGraphbyHashTable(Arbol tree) {
-        HashTable hashtable = tree.getHashtable();
-        Lista nodes = hashtable.getNodes();
-
-        for (int i = 0; i < nodes.count(); i++) {
-            Nodo node = (Nodo) nodes.get(i);
-
-            if (node == null) {
-                continue;
-            }
-
-            String nodeId = node.getPerson().getNickname();
-            //System.out.println(nodeId);
-
-            if (graph.getNode(nodeId) == null) {
-                graph.addNode(nodeId).setAttribute("ui.label", nodeId);
-            }
-
-            Lista children = node.getChildren();
-
-            // Nunca cae aquí...
-            /*if (children == null || children.count() == 0) {
-                continue;
-            }*/
-            for (int j = 0; j < children.count(); j++) {
-                Nodo child = (Nodo) children.get(j);
-
-                if (child == null) {
-                    continue;
-                }
-
-                //System.out.println(child.getPerson().getNickname());
-
-                String childId = child.getPerson().getNickname();
-
-                if (graph.getNode(childId) == null) {
-                    graph.addNode(childId).setAttribute("ui.label", childId);
-                }
-
-                String edgeId = nodeId + "-" + childId;
-                if (graph.getEdge(edgeId) == null) {
-                    graph.addEdge(edgeId, nodeId, childId);
-                }
-            }
-        }
-        graph.setAttribute("ui.stylesheet", "node { fill-color: lightblue; }");
-    }
-
-    public void populateGraphFromRootWithBFS(Nodo root) {
-        if (root == null) {
+    public void populateGraphbyAncestors(Lista descendientes, String targetNickname) {
+        if (descendientes == null || descendientes.count() == 0 || targetNickname == null) {
             return;
         }
 
-        // Usar BFS para obtener todos los nodos alcanzables desde root
-        Busqueda busqueda = new Busqueda();
-        Lista reachableNodes = busqueda.visitAllNodesDFS(root);
+        int[] currentXPosition = new int[100];
+        Nodo root = tree.getRoot();
 
-        // Crear nodos en el grafo
-        for (int i = 0; i < reachableNodes.count(); i++) {
-            Nodo node = (Nodo) reachableNodes.get(i);
+        String rootNickname = root.getPerson().getNickname();
+        graph.addNode(rootNickname).setAttribute("ui.label", rootNickname);
+        assignNodePosition(root, 0, currentXPosition);
 
-            if (node == null) {
+        for (int i = 0; i < descendientes.count(); i++) {
+            Nodo currentNode = (Nodo) descendientes.get(i);
+
+            if (currentNode == null || currentNode.getPerson() == null) {
                 continue;
             }
 
-            // Crear nodo en el grafo
-            String nodeId = node.getPerson().getNickname();
-            if (graph.getNode(nodeId) == null) {
-                graph.addNode(nodeId).setAttribute("ui.label", nodeId);
-            }
-        }
-
-        // Crear aristas en el grafo (asegurando unicidad en ambas direcciones)
-        for (int i = 0; i < reachableNodes.count(); i++) {
-            Nodo node = (Nodo) reachableNodes.get(i);
-
-            if (node == null) {
-                continue;
+            String currentNickname = currentNode.getPerson().getNickname();
+            
+            if (currentNickname.equals(targetNickname)) {
+                break;
             }
 
-            String nodeId = node.getPerson().getNickname();
-            Lista children = node.getChildren();
-
-            if (children != null && children.count() > 0) {
+            Lista children = currentNode.getChildren();
+            if (children != null) {
                 for (int j = 0; j < children.count(); j++) {
                     Nodo child = (Nodo) children.get(j);
 
-                    if (child == null) {
+                    if (child == null || child.getPerson() == null) {
                         continue;
                     }
 
-                    String childId = child.getPerson().getNickname();
+                    String childNickname = child.getPerson().getNickname();
+                    String[] splitChild = childNickname.split(", ");
 
-                    // Comprobar que no sea una arista reflexiva
-                    if (nodeId.equals(childId)) {
-                        continue; // Saltar si los nodos son iguales
+                    if (graph.getNode(childNickname) == null) {
+                        if (" ".contains(splitChild[1])) {
+                            graph.addNode(childNickname).setAttribute("ui.label", splitChild[0]);
+                        } else {
+                            graph.addNode(childNickname).setAttribute("ui.label", childNickname);
+                        }
+                        
+                        assignNodePosition(child, i + 1, currentXPosition);
                     }
 
-                    // Generar un identificador único para la arista
-                    String edgeId = generateEdgeId(nodeId, childId);
-
-                    // Verificar existencia de la arista en ambas direcciones antes de crearla
+                    String edgeId = generateEdgeId(currentNickname, childNickname);
                     if (graph.getEdge(edgeId) == null) {
-                        graph.addEdge(edgeId, nodeId, childId);
+                        graph.addEdge(edgeId, currentNickname, childNickname);
                     }
                 }
             }
         }
+
+        graph.setAttribute("ui.stylesheet", "node { fill-color: lightblue; }");
     }
 
-    public void populateGraphbyAncestros(Lista decendientes) {
-
-        if (decendientes == null) {
+    private void assignNodePosition(Nodo node, int level, int[] currentXPosition) {
+        if (node == null || node.getPerson() == null) {
             return;
         }
 
-        for (int i = 0; i < decendientes.count(); i++) {
+        String nodeNickname = node.getPerson().getNickname();
 
-            if(decendientes.count()>0){
-                Nodo node = (Nodo) decendientes.get(i);
-
-                String nodeNickname = node.getPerson().getNickname();
-
-                if (node.getPerson() == null) {
-                    continue;
-                }
-
-                System.out.println(nodeNickname);
-
-                graph.addNode(node.getPerson().getNickname()).setAttribute("ui.label", node.getPerson().getNickname());
-
-                for (int j = 0; j < node.getChildren().count(); j++) {
-
-                    Nodo child = (Nodo) node.getChildren().get(j);
-
-                    String childNickname = child.getPerson().getNickname();
-
-                    if (child.getPerson() == null) {
-                        continue;
-                    }
-
-                    if (nodeNickname.equals(childNickname)) {
-                        continue;
-                    }
-
-                    graph.addNode(child.getPerson().getNickname()).setAttribute("ui.label", child.getPerson().getNickname());
-
-                    graph.addEdge(node.getPerson().getFullname() + "-" + child.getPerson().getFullname(), nodeNickname, childNickname);
-
-                }
-            }
-        }
-        graph.setAttribute("ui.stylesheet", "node { fill-color: lightblue; }");
-        
+        int xPosition = currentXPosition[level] += 4;
+        graph.getNode(nodeNickname).setAttribute("xyz", xPosition, -level, 0);
     }
 
     public void populateGraphbyRoot(Nodo root) {
@@ -257,7 +169,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         String nodeNickname = node.getPerson().getNickname();
 
         if (graph.getNode(nodeNickname) == null) {
-            graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
+            String[] split = nodeNickname.split(", ");
+            if (" ".contains(split[1])) {
+                graph.addNode(nodeNickname).setAttribute("ui.label", split[0]);
+            } else {
+                graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
+            }
+
         }
 
         int xPosition = currentXPosition[level] += 3;
@@ -267,60 +185,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         if (children != null) {
             for (int i = 0; i < children.count(); i++) {
                 Nodo child = (Nodo) children.get(i);
-                assignNodePositions(child, level + 1, currentXPosition);
-            }
-        }
-    }
-    
-    public void populateGraph(Arbol tree) {
-        graph.clear();
-        HashTable hashtable = tree.getHashtable();
-        agregarNodos(hashtable);
-
-        // Opcional: Agregar estilo al grafo
-        graph.setAttribute("ui.stylesheet", "node { fill-color: grey; }");
-        JOptionPane.showMessageDialog(this, "Grafo poblado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void agregarNodos(HashTable hashtable) {
-        Lista nodes = hashtable.getNodes();
-       
-        for (int i = 0; i < nodes.count(); i++) {
-            Nodo node = (Nodo) nodes.get(i);
-
-            if (node == null) {
-                continue;
-            }
-
-            String nodeId = node.getPerson().getFullname() + ", " + node.getPerson().getOfHisName();
-
-            if (graph.getNode(nodeId) == null) {
-                graph.addNode(nodeId).setAttribute("ui.label", nodeId);
-            }
-
-            Lista children = node.getChildren();
-
-            if (children == null || children.count() == 0) {
-                continue;
-            }
-
-            for (int j = 0; j < children.count(); j++) {
-                Nodo child = (Nodo) children.get(j);
-
-                if (child == null) {
-                    continue;
-                }
-
-                String childId = child.getPerson().getFullname()+ ", " + child.getPerson().getOfHisName();
-
-                if (graph.getNode(childId) == null) {
-                    graph.addNode(childId).setAttribute("ui.label", childId);
-                }
-
-                String edgeId = nodeId + "-" + childId;
-                if (graph.getEdge(edgeId) == null) {
-                    graph.addEdge(edgeId, nodeId, childId);
-                }
+                assignNodePositions(child, level + 3, currentXPosition);
             }
         }
     }
@@ -362,7 +227,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
             String[] fullname = id.split(", ");
             if ("".equals(tree.getHashtable().getNode(fullname[0], fullname[1]).getPerson().getEyes())) {
                 Persona persona = tree.getHashtable().getNode(fullname[0], fullname[1]).getPerson();
-                JOptionPane.showMessageDialog(null, "Fullname: " + persona.getFullname() + " First", id, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Fullname: " + persona.getFullname(), id, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 String resultados = tree.getHashtable().getNode(fullname[0], fullname[1]).getPerson().leer();
                 JOptionPane.showMessageDialog(null, resultados, id, JOptionPane.INFORMATION_MESSAGE);
