@@ -5,6 +5,8 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta es la clase nodo, encargada de almacenar a las personas y sus descendientes.
+ * 
  * @version 13/11/2024
  * @author Michelle García
  */
@@ -14,13 +16,22 @@ public class Nodo {
     private Persona person;
     private int height;
 
-    
+    /***
+     * Constructor de la clase Nodo para personas con hijos.
+     * 
+     * @param person Objeto de tipo persona
+     * @param children Lista de nodos hijos de la persona
+     */ 
     public Nodo(Persona person, Lista children) {
         this.person = person;
         this.decendientes = children;
     }
     
-    
+    /***
+     * Constructor de la clase Nodo para personas sin hijos
+     * 
+     * @param person Objeto de tipo persona
+     */
     public Nodo(Persona person) {
         this.person = person;
         this.decendientes = new Lista();

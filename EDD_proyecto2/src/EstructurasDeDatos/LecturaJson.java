@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Michelle García
+ * @author Santiago Castro, Michelle García
  */
 public class LecturaJson {
 
@@ -160,64 +160,55 @@ public class LecturaJson {
                 }
             }
 
-            if (root != null) {
-                arbol = new Arbol(root, hashtable);
-                for (int i = 0; i < hashtable.getNodes().count(); i++) {
-                    Nodo aux = (Nodo) hashtable.getNodes().get(i);
-                    if (aux.getChildren() != null) {
-                        if (aux.getPerson().getChildren().count() > 0) {
-                            for (int j = 0; j < hashtable.getNodes().count(); j++) {
-                                Nodo aux2 = (Nodo) hashtable.getNodes().get(j);
-                                if (aux.getPerson().getFullname().equals(aux2.getPerson().getFather())) {
+            arbol = new Arbol(root, hashtable);
+            for (int i = 0; i < hashtable.getNodes().count(); i++) {
+                Nodo aux = (Nodo) hashtable.getNodes().get(i);
+                if (aux.getChildren() != null) {
+                    if (aux.getPerson().getChildren().count() > 0) {
+                        for (int j = 0; j < hashtable.getNodes().count(); j++) {
+                            Nodo aux2 = (Nodo) hashtable.getNodes().get(j);
+                            if (aux.getPerson().getFullname().equals(aux2.getPerson().getFather())) {
+                                arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                            } else if (aux.getPerson().getKnownAs().equals(aux2.getPerson().getFather())) {
+                                arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
+                            } else {
+                                String nickname = aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName() + " of his name";
+                                if (nickname.equals(aux2.getPerson().getFather())) {
                                     arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
-                                } else if (aux.getPerson().getKnownAs().equals(aux2.getPerson().getFather())) {
-                                    arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
-                                } else {
-                                    String nickname = aux.getPerson().getFullname() + ", " + aux.getPerson().getOfHisName() + " of his name";
-                                    if (nickname.equals(aux2.getPerson().getFather())) {
-                                        arbol.addChildren(aux.getPerson().getNickname(), aux2.getPerson().getNickname());
-                                    }
                                 }
                             }
                         }
                     }
                 }
-
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        if (arbol != null) {
-            arbol = conexionHijos(arbol, listaPersonas, hashtable);
-        }
+        arbol = conexionHijos(arbol, listaPersonas, hashtable);
         return arbol;
     }
 
     public Arbol conexionHijos(Arbol arbol, Lista listaPersonas, HashTable hashtable) {
 
-        if (arbol.getHashtable() != null && arbol.getHashtable().getNodes() != null) {
+        if (arbol.getHashtable() != null) {
             for (int i = 0; i < arbol.getHashtable().getNodes().count(); i++) {
                 Nodo aux = (Nodo) arbol.getHashtable().getNodes().get(i);
-                if (aux != null) {
-                    Persona personaAux = aux.getPerson();
-                    if (personaAux.getChildren() != null) {
-                        for (int x = 0; x < personaAux.getChildren().count(); x++) {
-                            String hijoName = (String) personaAux.getChildren().get(x);
-                            if (!personaExistByName(listaPersonas, hijoName) && hijoName != null) {
-                                Persona persona = new Persona(hijoName, personaAux.getFullname());
-                                Nodo nodo = new Nodo(persona);
-                                arbol.getHashtable().addNode(nodo);
-                                arbol.addChildren(aux.getPerson().getNickname(), persona.getNickname());
-                            }
+                Persona personaAux = aux.getPerson();
+                if (personaAux.getChildren() != null) {
+                    for (int x = 0; x < personaAux.getChildren().count(); x++) {
+                        String hijoName = (String) personaAux.getChildren().get(x);
+                        if (!personaExistByName(listaPersonas, hijoName) && hijoName != null) {
+                            Persona persona = new Persona(hijoName, personaAux.getFullname());
+                            Nodo nodo = new Nodo(persona);
+                            arbol.getHashtable().addNode(nodo);
+                            arbol.addChildren(aux.getPerson().getNickname(), persona.getNickname());
                         }
                     }
-
                 }
-
             }
         }
-
+        
         return arbol;
     }
 

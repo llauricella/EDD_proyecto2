@@ -5,6 +5,9 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta clase es la encargada de crear un objeto hashtable. Contiene una capacidad especificada, una lista de nodos y 
+ * un arreglo de listas cuya función es almacenar nodos.
+ * 
  * @version 13/11/2024
  * @author Michelle García
  */
@@ -15,10 +18,9 @@ public class HashTable {
     private Lista[] table;
 
     /**
-     * Constructor del hashtable
+     * Constructor del hashtable.
      *
-     *
-     * @param capacity
+     * @param capacity Capacidad.
      */
     public HashTable(int capacity) {
         this.capacity = capacity;
@@ -29,9 +31,8 @@ public class HashTable {
     /**
      * Función para generar un hash
      *
-     *
-     * @param nickname
-     * @return
+     * @param nickname Apodo identificador
+     * @return Hash según el nickname
      */
     public int hash(String nickname) {
         int hash = 0;
@@ -46,12 +47,11 @@ public class HashTable {
     }
 
     /**
-     * Función para obtener un nodo
+     * Función para obtener un nodo dentro del hashtable.
      *
-     *
-     * @param fullname
-     * @param mote
-     * @return
+     * @param fullname Nombre completo.
+     * @param mote Identificador de nombre.
+     * @return Nodo coincidente.
      */
     public Nodo getNode(String fullname, String mote) {
         String nickname = fullname + ", " + mote;
@@ -84,9 +84,7 @@ public class HashTable {
     /**
      * Función para agregar un nodo al hashtable
      *
-     *
-     * @param newNode
-     * @param code
+     * @param newNode Nodo a añadir
      */
     public void addNode(Nodo newNode) {
         String toHash = newNode.getPerson().getNickname();
@@ -108,20 +106,18 @@ public class HashTable {
     }
 
     /**
-     * Función para agregar un nodo al hashtable
+     * Función para obtener la lista de nodos
      *
-     *
-     * @return
+     * @return Lista de nodos
      */
     public Lista getNodes() {
         return nodes;
     }
 
     /**
-     * Función para agregar un nodo al hashtable
+     * Función para cambiar la lista de nodos
      *
-     *
-     * @param nodes
+     * @param nodes Lista de nodos
      */
     public void setNodes(Lista nodes) {
         this.nodes = nodes;

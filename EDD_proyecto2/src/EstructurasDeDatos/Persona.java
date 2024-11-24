@@ -5,6 +5,8 @@
 package EstructurasDeDatos;
 
 /**
+ * Esta clase define un objeto de tipo persona. Contiene toda la información pertinente a cada padre e hijo.
+ * 
  * @version 13/11/2024
  * @author Michelle García
  */
@@ -25,28 +27,11 @@ public class Persona {
     private Lista children;
 
     /**
+     * Constructor de personas donde solo se conoce su nombre y padre.
      *
-     * @param fullname
+     * @param fullname Nombre de la persona.
+     * @param father Nombre del padre.
      */
-
-    //LecturaJson sola
-    public Persona(String fullname) {
-        this.fullname = fullname;
-        this.ofHisName = "";
-        this.father = "";
-        this.eyes = "";
-        this.hair = "";
-        this.knownAs = "";
-        this.mother = "";
-        this.title = "";
-        this.wedTo = "";
-        this.notes = "";
-        this.fate = "";
-        this.children = null;
-        this.nickname = fullname + ", " + ofHisName;
-    }
-
-
     public Persona(String fullname, String father) {
         this.fullname = fullname;
         this.ofHisName = " ";
@@ -63,6 +48,16 @@ public class Persona {
         this.nickname = fullname + ", " + ofHisName;
     }
 
+    /**
+     * Constructor de personas con información completa.
+     *
+     * @param fullname Nombre completo
+     * @param ofHisName Identificador de nombre
+     * @param father Nombre del padre
+     * @param eyes Color de ojos
+     * @param hair Color de cabello
+     * @param children En caso de tener, lista de nombres de los hijos.
+     */
     public Persona(String fullname, String ofHisName, String father, String eyes, String hair, Lista children) {
         this.fullname = fullname;
         this.ofHisName = ofHisName;
@@ -247,7 +242,11 @@ public class Persona {
         this.nickname = nickname;
     }
 
-    // String fullname, String ofHisName, String father, String eyes, String hair
+    /**
+     * Función para obtener un string con toda la información de la persona.
+     * 
+     * @return String con la información de la persona.
+     */
     public String leer() {
 
         String txt = "";
