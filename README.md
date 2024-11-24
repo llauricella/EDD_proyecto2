@@ -9,5 +9,5 @@ _Programa para ver el registro de linajes actual._
 > Antes de inicializar el proyecto es necesario agregar 3 librerías. Estas se encuentran en el zip "Librerías". Para añadirlas a Netbeans debe utilizar la opción Add JAR/Folder.
 * Clases.png
 > Diagrama de clases del proyecto
-* Archivos de entrada
+* Archivo de entrada
 > Baratheon.json
