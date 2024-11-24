@@ -16,12 +16,22 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Santiago Castro, Michelle García
+ * Esta clase contiene las funciones
+ * responsables de cargar el archivo 
+ * json para construir el arbol y su 
+ * hashtable.
  */
+
 public class LecturaJson {
 
     /**
-     *
-     * @return @throws java.io.IOException
+     *Esta funcion se encarga de procesar los datos
+     * del archivo Json para la creacion del arbol.
+     * Ademas crea las adyacencias del mismo entre 
+     * padres e hijos.
+     * @return Retorna una variable de tipo arbol 
+     * con la que se va a construir el arbol 
+     * genealogico.
      * @throws java.io.IOException
      */
     public Arbol LecturaJson() throws IOException {
@@ -185,11 +195,25 @@ public class LecturaJson {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        arbol = conexionHijos(arbol, listaPersonas, hashtable);
+        arbol = conexionHijos(arbol, listaPersonas);
         return arbol;
     }
+    
+    /**
+     *
+     * Funcion encragada de conectar los hijos 
+     * sin descripcion en el archivo Json con 
+     * sus padres respectivos.
+     * @param arbol con la informacion de 
+     * las personas descritas en el archivo
+     * @param listaPersonas contiene  todas
+     * las personas descritas en el archivo
+     * @return Retorna una variable de tipo arbol 
+     * que contiene todos los miembros de la familia
+     * ya conectados.
+     */ 
 
-    public Arbol conexionHijos(Arbol arbol, Lista listaPersonas, HashTable hashtable) {
+    public Arbol conexionHijos(Arbol arbol, Lista listaPersonas) {
 
         if (arbol.getHashtable() != null) {
             for (int i = 0; i < arbol.getHashtable().getNodes().count(); i++) {
@@ -211,7 +235,21 @@ public class LecturaJson {
         
         return arbol;
     }
-
+      
+    /* 
+     * 
+     *
+     * Funcion encragada de determinar si una persona
+     * ya pertenece a la lista de personas, la cual
+     * contiene a todas las personas con descripcion presentes en el 
+     * archivo.
+     * @param Lista Contiene a todas las personas
+     * con descripcion en el archivo
+     * @param String Nombre de la persona que se 
+     * desea buscar en la lista de personas
+     * @return Boleano Retorna un booleano True or False
+     * indicando si la persona existe en la lista o no.
+    */ 
     public Boolean personaExistByName(Lista personas, String name) {
         for (int x = 0; x < personas.count(); x++) {
             var p = (Persona) personas.get(x);

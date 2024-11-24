@@ -392,6 +392,9 @@
           <Font name="Segoe UI Semilight" size="12" style="2"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GeneracionFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="GenerarGrafoButton">
       <Properties>
@@ -404,7 +407,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Generar Grafo"/>
+        <Property name="text" type="java.lang.String" value="Ver descendencia"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GenerarGrafoButtonActionPerformed"/>
