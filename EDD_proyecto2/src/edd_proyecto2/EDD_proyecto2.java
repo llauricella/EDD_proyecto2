@@ -4,17 +4,22 @@
  */
 package edd_proyecto2;
 
+import edd_Interfaz.MenuPrincipal;
+
 /**
  *
- * @author lalau
+ * @author Luigi Lauricella
  */
 public class EDD_proyecto2 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args){
+        
+        MenuPrincipal menuinicial = new MenuPrincipal();
+        menuinicial.setLocationRelativeTo(null);
+        menuinicial.setResizable(false);
+        menuinicial.show();
     }
-    
 }
