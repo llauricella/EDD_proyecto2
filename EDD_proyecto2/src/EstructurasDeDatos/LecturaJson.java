@@ -14,7 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * @version 24/11/2024
  * @author Santiago Castro, Michelle García
  * Esta clase contiene las funciones
  * responsables de cargar el archivo 

@@ -9,7 +9,7 @@ package EstructurasDeDatos;
  * cantidad de elementos, una lista donde se almacenan los objetos siguienres y
  * un elemento de tipo ElementoLista.
  *
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class Lista {

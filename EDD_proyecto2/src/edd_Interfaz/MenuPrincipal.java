@@ -9,7 +9,11 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * *
+ * Clase de tipo JFrameForm para generar
+ * el menú principal.
+ * 
+ * @version 24/11/2024
  * @author Luigi Lauricella
  */
 public class MenuPrincipal extends javax.swing.JFrame {
@@ -18,7 +22,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private Arbol tree;
 
     /**
-     * Creates new form MenuPrincipal
+     * Constructor del JFrameForm y limpia los
+     * comboBox.
      */
     public MenuPrincipal() {
         initComponents();
@@ -302,7 +307,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /**
          * *
          * Botón para subir un archivo JSON a la interfaz para su debido
-         * procesamiento.
+         * procesamiento y limpiar los comboBox.
          */
         if (graphstream != null) {
             graphstream.setVisible(false);
@@ -358,6 +363,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_ArbolButtonActionPerformed
 
     private void PersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonaButtonActionPerformed
+        /**
+         * *
+         * Botón para buscar a una persona por su nombre y mostrar
+         * una lista de opciones en un comboBox.
+         */
+        
         if (tree != null) {
             PersonaBox.removeAllItems();
             String selectedItem = (String) PersonaField.getText();
@@ -381,7 +392,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_PersonaButtonActionPerformed
 
     private void TituloButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloButtonActionPerformed
-
+        /**
+         * *
+         * Botón para buscar a una persona según su titulo y
+         * mostrar las opciones encontradas en un comboBox.
+         */
+        
         String titulo = TituloField.getText();
         if (titulo != null) {
             TituloBox.removeAllItems();
@@ -408,6 +424,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TituloButtonActionPerformed
 
     private void AntepasadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntepasadoButtonActionPerformed
+        /**
+         * *
+         * Botón para buscar mostrar los antepasados de una
+         * persona seleccionada en un comboBox.
+         */
+        
         if (tree != null) {
             String antepasado = (String) AntepasadoBox.getSelectedItem();
             if (antepasado != null) {
@@ -434,6 +456,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_PersonaFieldActionPerformed
 
     private void GeneracionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneracionButtonActionPerformed
+        /**
+         * *
+         * Botón para mostrar las personas de una 
+         * generación según su número entero.
+         */
+        
         if (tree != null) {
             try {
                 int height = Integer.parseInt(GeneracionField.getText());
@@ -462,6 +490,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AntepasadoBoxActionPerformed
 
     private void GenerarGrafoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarGrafoButtonActionPerformed
+        /**
+         * *
+         * Botón para generar un grafo del sub-arbol
+         * de la persona seleccionada en el comboBox.
+         */
+        
         String persona = (String) PersonaBox.getSelectedItem();
         if (persona != null) {
             if (graphstream != null) {
@@ -478,6 +512,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_GenerarGrafoButtonActionPerformed
 
     private void TituloDetalleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloDetalleButtonActionPerformed
+        /**
+         * *
+         * Botón para ver los datos de la persona seleccionada
+         * en el comboBox.
+         */
+        
         String nombre = (String) TituloBox.getSelectedItem();
         if (nombre != null) {
             String[] nickname = nombre.split(", ");

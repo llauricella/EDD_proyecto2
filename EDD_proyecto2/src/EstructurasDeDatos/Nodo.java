@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * Esta es la clase nodo, encargada de almacenar a las personas y sus descendientes.
  * 
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class Nodo {

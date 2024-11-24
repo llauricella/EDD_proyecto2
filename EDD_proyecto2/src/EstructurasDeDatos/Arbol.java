@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * Esta es la clase encargada de describir a los objetos de tipo árbol
  *
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class Arbol {

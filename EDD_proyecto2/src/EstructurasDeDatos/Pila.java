@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * Esta clase define un objeto de tipo stack. Contiene una lista de elementos.
  *
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class Pila {

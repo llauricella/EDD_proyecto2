@@ -8,7 +8,7 @@ package EstructurasDeDatos;
  * Esta clase es la encargada de crear un objeto hashtable. Contiene una capacidad especificada, una lista de nodos y 
  * un arreglo de listas cuya función es almacenar nodos.
  * 
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class HashTable {

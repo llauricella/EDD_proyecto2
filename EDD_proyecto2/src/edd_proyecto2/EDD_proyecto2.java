@@ -8,6 +8,7 @@ import edd_Interfaz.MenuPrincipal;
 
 /**
  *
+ * @version 24/11/2024
  * @author Luigi Lauricella
  */
 public class EDD_proyecto2 {
@@ -19,7 +20,6 @@ public class EDD_proyecto2 {
         
         MenuPrincipal menuinicial = new MenuPrincipal();
         menuinicial.setLocationRelativeTo(null);
-        menuinicial.setResizable(false);
         menuinicial.show();
     }
 }

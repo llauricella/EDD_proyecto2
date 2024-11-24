@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * En esta clase se almacenan todos lo métodos de busca a ejecutar.
  *
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class Busqueda {

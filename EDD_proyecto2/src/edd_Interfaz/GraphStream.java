@@ -13,7 +13,11 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- *
+ * *
+ * Clase de tipo JFrameForm para generar
+ * el árbol mediante GraphStream.
+ * 
+ * @version 24/11/2024
  * @author Luigi Lauricella
  */
 public class GraphStream extends javax.swing.JFrame implements ViewerListener {
@@ -23,7 +27,8 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     private final ViewerPipe fromviewer;
 
     /**
-     * Creates new form GraphStream
+     * Constructor del JFrameForm y inicializa
+     * el viewer para la interactividad del árbol.
      *
      * @param tree
      */
@@ -45,6 +50,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         PumpViewer();
     }
 
+    /**
+     * Esta función se encarga poblar el Graphstream
+     * mediante una lista de decendientes y el target.
+     * 
+     * @param descendientes
+     * @param targetNickname
+     */
     public void populateGraphbyAncestors(Lista descendientes, String targetNickname) {
         if (descendientes == null || descendientes.count() == 0 || targetNickname == null) {
             return;
@@ -55,7 +67,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
 
         String rootNickname = root.getPerson().getNickname();
         graph.addNode(rootNickname).setAttribute("ui.label", rootNickname);
-        assignNodePosition(root, 0, currentXPosition);
+        assignNodePositionAncester(root, 0, currentXPosition);
 
         for (int i = 0; i < descendientes.count(); i++) {
             Nodo currentNode = (Nodo) descendientes.get(i);
@@ -89,7 +101,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
                             graph.addNode(childNickname).setAttribute("ui.label", childNickname);
                         }
                         
-                        assignNodePosition(child, i + 1, currentXPosition);
+                        assignNodePositionAncester(child, i + 1, currentXPosition);
                     }
 
                     String edgeId = generateEdgeId(currentNickname, childNickname);
@@ -102,8 +114,17 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
 
         graph.setAttribute("ui.stylesheet", "node { fill-color: lightblue; }");
     }
-
-    private void assignNodePosition(Nodo node, int level, int[] currentXPosition) {
+    
+    /**
+     * Esta función se encarga asignar la posición
+     * de los nodos para mostrarse correctamente
+     * en el árbol basado en los antepasados.
+     * 
+     * @param node
+     * @param level
+     * @param currentXposition
+     */
+    private void assignNodePositionAncester(Nodo node, int level, int[] currentXPosition) {
         if (node == null || node.getPerson() == null) {
             return;
         }
@@ -114,6 +135,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         graph.getNode(nodeNickname).setAttribute("xyz", xPosition, -level, 0);
     }
 
+    /**
+     * Esta función se encarga poblar el Graphstream
+     * mediante un nodo root.
+     * 
+     * 
+     * @param root
+     */
     public void populateGraphbyRoot(Nodo root) {
 
         if (root == null) {
@@ -124,7 +152,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         Lista reachableNodes = busqueda.visitAllNodesDFS(root);
 
         int[] currentXPosition = new int[100];
-        assignNodePositions(root, 0, currentXPosition);
+        assignNodePositionsRoot(root, 0, currentXPosition);
 
         for (int i = 0; i < reachableNodes.count(); i++) {
             Nodo node = (Nodo) reachableNodes.get(i);
@@ -161,7 +189,16 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         graph.setAttribute("ui.stylesheet", "node { fill-color: lightblue; }");
     }
 
-    private void assignNodePositions(Nodo node, int level, int[] currentXPosition) {
+    /**
+     * Esta función se encarga asignar la posición
+     * de los nodos para mostrarse correctamente
+     * en el árbol basado en un root.
+     * 
+     * @param node
+     * @param level
+     * @param currentXposition
+     */
+    private void assignNodePositionsRoot(Nodo node, int level, int[] currentXPosition) {
         if (node == null || node.getPerson() == null) {
             return;
         }
@@ -185,11 +222,18 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         if (children != null) {
             for (int i = 0; i < children.count(); i++) {
                 Nodo child = (Nodo) children.get(i);
-                assignNodePositions(child, level + 3, currentXPosition);
+                assignNodePositionsRoot(child, level + 3, currentXPosition);
             }
         }
     }
 
+    /**
+     * Esta función se encarga de generar un Id
+     * único para cada arista.
+     * 
+     * @param nodeId1
+     * @param nodeId2
+     */
     private String generateEdgeId(String nodeId1, String nodeId2) {
         if (nodeId1.compareTo(nodeId2) < 0) {
             return nodeId1 + "-" + nodeId2;
@@ -198,6 +242,12 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         }
     }
 
+    /**
+     * Esta función se encarga de mantener
+     * la interactividad del árbol de manera
+     * correcta.
+     * 
+     */
     private void PumpViewer() {
         SwingWorker<Void, Void> worker = new SwingWorker<>() {
             @Override
@@ -220,6 +270,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
     public void viewClosed(String id) {
     }
 
+    /**
+     * Esta función se encarga de mostrar
+     * la información de los nodos cuando
+     * haces click en ellos.
+     * 
+     * @param id
+     */
     @Override
     public void buttonPushed(String id) {
         Node node = graph.getNode(id);

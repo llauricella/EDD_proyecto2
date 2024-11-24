@@ -7,7 +7,7 @@ package EstructurasDeDatos;
 /**
  * Esta clase define un objeto de tipo persona. Contiene toda la información pertinente a cada padre e hijo.
  * 
- * @version 13/11/2024
+ * @version 24/11/2024
  * @author Michelle García
  */
 public class Persona {
