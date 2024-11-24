@@ -27,11 +27,6 @@ public class Persona {
     /**
      *
      * @param fullname
-     * @param ofHisName
-     * @param father
-     * @param hair
-     * @param eyes
-     * @param children
      */
 
     //LecturaJson sola

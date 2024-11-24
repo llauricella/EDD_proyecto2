@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author miche_ysmoa6e
+ * @author Michelle García
  */
 public class LecturaJson {
 
@@ -62,7 +62,6 @@ public class LecturaJson {
 
                                 if (miembrosEntrySet.size() != 1) {
                                     JOptionPane.showMessageDialog(null, "ERROR, No es un dato válido", "Error", JOptionPane.ERROR_MESSAGE);
-                                    ;
                                 }
 
                                 var miembroEntry = miembrosEntrySet.iterator().next();
@@ -182,16 +181,6 @@ public class LecturaJson {
                     }
                 }
             }
-            /*
-            System.out.println(hashtable.getNodes().printList());
-            for (int i = 0; i < hashtable.getNodes().count(); i++){
-                Nodo auxNodo = (Nodo)hashtable.getNodes().get(i);
-                System.out.println(auxNodo.getPerson().leer());
-                System.out.println(auxNodo.getPerson().getChildren().count());
-                System.out.println(auxNodo.getPerson().getChildren().printChild());
-                System.out.println("");
-            }
-             */
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR, No es un tipo de dato válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -219,19 +208,6 @@ public class LecturaJson {
                 }
             }
         }
-
-        /*
-        for (int i = 0; i < arbol.getHashtable().getNodes().count(); i++) {
-            Nodo auxNodo = (Nodo) arbol.getHashtable().getNodes().get(i);
-            System.out.println(auxNodo.getPerson().leer());
-            if (auxNodo.getChildren() != null) {
-                System.out.println(auxNodo.getChildren().count());
-                System.out.println(auxNodo.getChildren().printList());
-            }
-            System.out.println("");
-        }
-        System.out.println(arbol.getHashtable().getNodes().count());
-         */
         
         return arbol;
     }

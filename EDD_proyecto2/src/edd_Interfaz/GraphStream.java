@@ -4,11 +4,7 @@
  */
 package edd_Interfaz;
 
-import EstructurasDeDatos.Busqueda;
-import EstructurasDeDatos.Nodo;
-import EstructurasDeDatos.Lista;
-import EstructurasDeDatos.Persona;
-import EstructurasDeDatos.Arbol;
+
 import EstructurasDeDatos.*;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
@@ -66,10 +62,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
                 if (node.getPerson() == null) {
                     continue;
                 }
-
-                System.out.println(nodeNickname);
-
-                graph.addNode(node.getPerson().getNickname()).setAttribute("ui.label", node.getPerson().getNickname());
+                String[] split = nodeNickname.split(", ");
+                if ("".contains(split[1])) {
+                    graph.addNode(nodeNickname).setAttribute("ui.label", split[1]);
+                } else {
+                    graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
+                }
+                
 
                 for (int j = 0; j < node.getChildren().count(); j++) {
 
@@ -84,9 +83,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
                     if (nodeNickname.equals(childNickname)) {
                         continue;
                     }
-
-                    graph.addNode(child.getPerson().getNickname()).setAttribute("ui.label", child.getPerson().getNickname());
-
+                    
+                    String[] splitChild = childNickname.split(", ");
+                    if ("".contains(splitChild[1])) {
+                        graph.addNode(childNickname).setAttribute("ui.label", splitChild[1]);
+                    } else {
+                        graph.addNode(childNickname).setAttribute("ui.label", childNickname);
+                    }
                     graph.addEdge(node.getPerson().getFullname() + "-" + child.getPerson().getFullname(), nodeNickname, childNickname);
 
                 }
@@ -151,7 +154,13 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         String nodeNickname = node.getPerson().getNickname();
 
         if (graph.getNode(nodeNickname) == null) {
-            graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
+            String[] split = nodeNickname.split(", ");
+            if (" ".contains(split[1])) {
+                graph.addNode(nodeNickname).setAttribute("ui.label", split[0]);
+            } else {
+                graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
+            }
+            
         }
 
         int xPosition = currentXPosition[level] += 3;
