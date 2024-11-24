@@ -409,7 +409,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 String[] nickname = antepasado.split(", ");
                 Nodo aux = tree.getHashtable().getNode(nickname[0], nickname[1]);
                 Lista ancestros = tree.ancestros(aux);
-                graphstream.populateGraphbyAncestros(ancestros);
+                graphstream.populateGraphbyAncestors(ancestros, antepasado);
                 graphstream.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR, no colocaste un nombre", "Error", JOptionPane.ERROR_MESSAGE);

@@ -4,7 +4,6 @@
  */
 package edd_Interfaz;
 
-
 import EstructurasDeDatos.*;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
@@ -46,57 +45,73 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
         PumpViewer();
     }
 
-    public void populateGraphbyAncestros(Lista decendientes) {
-
-        if (decendientes == null) {
+    public void populateGraphbyAncestors(Lista descendientes, String targetNickname) {
+        if (descendientes == null || descendientes.count() == 0 || targetNickname == null) {
             return;
         }
 
-        for (int i = 0; i < decendientes.count(); i++) {
+        int[] currentXPosition = new int[100];
+        Nodo root = tree.getRoot();
 
-            if(decendientes.count()>0){
-                Nodo node = (Nodo) decendientes.get(i);
+        String rootNickname = root.getPerson().getNickname();
+        graph.addNode(rootNickname).setAttribute("ui.label", rootNickname);
+        assignNodePosition(root, 0, currentXPosition);
 
-                String nodeNickname = node.getPerson().getNickname();
+        for (int i = 0; i < descendientes.count(); i++) {
+            Nodo currentNode = (Nodo) descendientes.get(i);
 
-                if (node.getPerson() == null) {
-                    continue;
-                }
-                String[] split = nodeNickname.split(", ");
-                if ("".contains(split[1])) {
-                    graph.addNode(nodeNickname).setAttribute("ui.label", split[1]);
-                } else {
-                    graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
-                }
-                
+            if (currentNode == null || currentNode.getPerson() == null) {
+                continue;
+            }
 
-                for (int j = 0; j < node.getChildren().count(); j++) {
+            String currentNickname = currentNode.getPerson().getNickname();
+            
+            if (currentNickname.equals(targetNickname)) {
+                break;
+            }
 
-                    Nodo child = (Nodo) node.getChildren().get(j);
+            Lista children = currentNode.getChildren();
+            if (children != null) {
+                for (int j = 0; j < children.count(); j++) {
+                    Nodo child = (Nodo) children.get(j);
+
+                    if (child == null || child.getPerson() == null) {
+                        continue;
+                    }
 
                     String childNickname = child.getPerson().getNickname();
-
-                    if (child.getPerson() == null) {
-                        continue;
-                    }
-
-                    if (nodeNickname.equals(childNickname)) {
-                        continue;
-                    }
-                    
                     String[] splitChild = childNickname.split(", ");
-                    if ("".contains(splitChild[1])) {
-                        graph.addNode(childNickname).setAttribute("ui.label", splitChild[1]);
-                    } else {
-                        graph.addNode(childNickname).setAttribute("ui.label", childNickname);
-                    }
-                    graph.addEdge(node.getPerson().getFullname() + "-" + child.getPerson().getFullname(), nodeNickname, childNickname);
 
+                    if (graph.getNode(childNickname) == null) {
+                        if (" ".contains(splitChild[1])) {
+                            graph.addNode(childNickname).setAttribute("ui.label", splitChild[0]);
+                        } else {
+                            graph.addNode(childNickname).setAttribute("ui.label", childNickname);
+                        }
+                        
+                        assignNodePosition(child, i + 1, currentXPosition);
+                    }
+
+                    String edgeId = generateEdgeId(currentNickname, childNickname);
+                    if (graph.getEdge(edgeId) == null) {
+                        graph.addEdge(edgeId, currentNickname, childNickname);
+                    }
                 }
             }
         }
+
         graph.setAttribute("ui.stylesheet", "node { fill-color: lightblue; }");
-        
+    }
+
+    private void assignNodePosition(Nodo node, int level, int[] currentXPosition) {
+        if (node == null || node.getPerson() == null) {
+            return;
+        }
+
+        String nodeNickname = node.getPerson().getNickname();
+
+        int xPosition = currentXPosition[level] += 3;
+        graph.getNode(nodeNickname).setAttribute("xyz", xPosition, -level, 0);
     }
 
     public void populateGraphbyRoot(Nodo root) {
@@ -160,7 +175,7 @@ public class GraphStream extends javax.swing.JFrame implements ViewerListener {
             } else {
                 graph.addNode(nodeNickname).setAttribute("ui.label", nodeNickname);
             }
-            
+
         }
 
         int xPosition = currentXPosition[level] += 3;
