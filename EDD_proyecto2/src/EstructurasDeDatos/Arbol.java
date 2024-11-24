@@ -67,11 +67,12 @@ public class Arbol {
     public void addChildren(String fatherNickname, String childNickname) {
        
         String[] father = fatherNickname.split(", ");
-        String[] child = fatherNickname.split(", ");      
+        String[] child = childNickname.split(", ");      
         
         Nodo parent = getHashtable().getNode(father[0], father[1]);
         Nodo children = getHashtable().getNode(child[0], child[1]);
         parent.getChildren().add(children);
+        
     }
 
     public Lista descendientesPorGeneracion(int height) {
